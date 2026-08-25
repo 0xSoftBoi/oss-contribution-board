@@ -142,9 +142,14 @@ failing to decode. Its two siblings in the same module take fixed-size arrays
 enforce length in the type system — `EncodingPacket` is the only one taking a
 slice, and the only one that can fail at runtime.
 
-Reported as [#229](https://github.com/cberner/raptorq/issues/229), fixed
-additively in [#230](https://github.com/cberner/raptorq/pull/230) with
-`try_deserialize -> Option<EncodingPacket>`.
+Reported as [#229](https://github.com/cberner/raptorq/issues/229). The
+proposed fix ([#230](https://github.com/cberner/raptorq/pull/230),
+`try_deserialize -> Option<EncodingPacket>`) was **rejected** — see the review
+note below. Documented instead in
+[#231](https://github.com/cberner/raptorq/pull/231). The observation about the
+sibling deserializers still holds, but it was the wrong conclusion to draw
+from: type-enforced length is not integrity, and this API cannot offer
+integrity at all.
 
 Our side is fixed independently rather than waiting on a release
 ([suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80)).
@@ -182,22 +187,51 @@ Runtime-tested only what could be: the x86_64 Linux wheel installs clean and
 passes the suite. macOS and Windows wheels are format-verified (Mach-O, PE32+)
 but not executed — stated as such in the PR rather than glossed.
 
-### Maintainer review: raptorq#230 — rejected, wants docs instead
+### Maintainer review: raptorq#230 — rejected; documented instead in #231
 
-cberner declined the `try_deserialize` fix: *"it gives a false sense of
-security. raptorq is a fountain code which can recover lost packets. It does
-not guarantee error detection. The caller is responsible for ensuring that the
-encoded data is free of corruption when passed to the decode functions. I'm
-happy to merge a PR that documents that."*
+cberner closed #230: *"it gives a false sense of security. raptorq is a
+fountain code which can recover lost packets. It does not guarantee error
+detection. The caller is responsible for ensuring that the encoded data is
+free of corruption when passed to the decode functions. I'm happy to merge a
+PR that documents that."*
 
-Fair, and it re-frames the finding: a length check on the FEC Payload ID looks
-like input validation but only covers one of many malformed inputs, so it
-invites callers to skip the integrity check they actually need. **Open
-follow-up:** repurpose #230 as documentation of the caller's corruption
-responsibility. Our own guard in
-[suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80) stands
-regardless — it is defence at the trust boundary, which is exactly where he
-says it belongs.
+He is right, and the correction is worth stating plainly: **a length check is
+not an integrity check.** It guards one malformed input out of many, and
+presenting it as *the* untrusted-input entry point invites callers to stop
+thinking past it. My #229 framing treated "cannot panic" as if it were
+"is safe to decode". Those are different properties.
+
+Delivered as [#231](https://github.com/cberner/raptorq/pull/231),
+documentation only, on a fresh branch since #230 was closed.
+
+**What writing it turned up, which I had not appreciated:** corrupt input has
+no single outcome. Verified against master rather than reasoned about —
+
+- corrupt **payload** bytes: `decode()` **succeeds and returns incorrect
+  data**, no error, no indication
+- corrupt **FEC Payload ID**: panics — `index out of bounds: the len is 1 but
+  the index is 200` at `decoder.rs:83`, because the block/symbol numbers index
+  decoder state
+- or decoding fails and returns `None`
+
+The silent-wrong-data case is the one that matters. "Does not guarantee error
+detection" reads easily as "corrupt input will fail to decode," and it does
+not. That is now the centre of the crate-level docs, which did not exist at
+all before.
+
+**Consequence for our own code, since a rejected upstream PR leaves stale
+claims behind:** the comment in
+[suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80) said
+upstream had a fallible variant to switch to once released. False once #230
+closed. Corrected to state what the guard does *not* cover — a long-enough
+corrupt shred still decodes to wrong data — and that the real guarantee has to
+come from authenticating shreds at the network boundary. The guard itself
+stands; it stops a truncated shred from panicking, which is defence at the
+trust boundary, exactly where cberner says it belongs.
+
+Lesson to carry: when an upstream PR is rejected, grep our own tree for
+comments that assumed it would land.
+
 
 ### Open question for the owner — license
 
