@@ -1,0 +1,121 @@
+From 30be148c00be04cc075e7a55de6df6c04fc043c7 Mon Sep 17 00:00:00 2001
+From: 0xSoftBoi <tsoma4770@gmail.com>
+Date: Mon, 18 May 2026 12:47:35 -0400
+Subject: [PATCH] fix(mktemp): preserve `..` literal prefix in template
+ (#12312)
+
+`Path::file_name()` returns `None` for paths ending in `..`, and
+`Path::parent()` pops the preceding component, so the existing prefix
+extraction silently dropped a literal `..` from templates such as
+`mktemp /tmp/..XXXXXX`, producing `/tmp/<random>` instead of
+`/tmp/..<random>`. GNU mktemp keeps the literal `..`.
+
+Detect a trailing `..` component in `prefix_from_template` and split
+the directory and prefix from the raw string before Path normalization
+discards it. Other templates continue through the unchanged code path.
+
+Fixes #12312
+---
+ src/uu/mktemp/src/mktemp.rs  | 11 ++++++
+ tests/by-util/test_mktemp.rs | 66 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 77 insertions(+)
+
+diff --git a/src/uu/mktemp/src/mktemp.rs b/src/uu/mktemp/src/mktemp.rs
+index e6e1ebda5..5e77b3be5 100644
+--- a/src/uu/mktemp/src/mktemp.rs
++++ b/src/uu/mktemp/src/mktemp.rs
+@@ -289,6 +289,17 @@ impl Params {
+ 
+                 let prefix = ".".to_string();
+ 
++                (directory, prefix)
++            } else if prefix_from_template.ends_with("/..") || prefix_from_template == ".." {
++                // `Path::file_name()` returns `None` for a path ending in `..`,
++                // and `Path::parent()` pops the preceding component, so both the
++                // directory and the prefix get mis-computed (e.g. `mktemp /tmp/..XXXXXX`
++                // would return `/tmp/<random>` instead of `/tmp/..<random>`). Strip
++                // the trailing `..` from `prefix_from_template` and use it as the
++                // literal prefix, matching GNU mktemp behavior.
++                let directory = Path::new(&prefix_from_option)
++                    .join(&prefix_from_template[..prefix_from_template.len() - 2]);
++                let prefix = "..".to_string();
+                 (directory, prefix)
+             } else {
+                 let directory = match prefix_path.parent() {
+diff --git a/tests/by-util/test_mktemp.rs b/tests/by-util/test_mktemp.rs
+index de277a4dd..000d6f303 100644
+--- a/tests/by-util/test_mktemp.rs
++++ b/tests/by-util/test_mktemp.rs
+@@ -1247,3 +1247,69 @@ fn test_write_error_removes_the_temporary_directory() {
+         .collect();
+     assert!(leftovers.is_empty(), "left behind: {leftovers:?}");
+ }
++
++#[test]
++#[cfg(unix)]
++fn test_mktemp_dotdot_prefix() {
++    // Regression test for https://github.com/uutils/coreutils/issues/12312
++    //
++    // `mktemp <dir>/..XXXXXX` should produce a file named `..<random>`
++    // inside <dir>, matching GNU mktemp. Previously, `Path::file_name()`
++    // returned `None` for a path ending in `..`, causing the literal `..`
++    // prefix to be dropped from the output filename.
++    let scene = TestScenario::new(util_name!());
++    let dir = tempdir().unwrap();
++    let template = dir.path().join("..XXXXXX");
++
++    let result = scene.ucmd().arg(template.to_str().unwrap()).succeeds();
++
++    let stdout_path = result.stdout_str().trim();
++    let file_name = std::path::Path::new(stdout_path)
++        .file_name()
++        .expect("output path should have a file name")
++        .to_str()
++        .expect("output path should be UTF-8");
++    assert!(
++        file_name.starts_with("..") && file_name.len() == "..XXXXXX".len(),
++        "expected file name to start with '..' and match template length, got {stdout_path}"
++    );
++    // The created file should live in <dir>, not <dir>/.. (the parent).
++    let parent = std::path::Path::new(stdout_path)
++        .parent()
++        .expect("output path should have a parent");
++    let dir_path = dir.path();
++    assert_eq!(
++        parent, dir_path,
++        "expected file to be created in {dir_path:?}, got {parent:?}"
++    );
++    assert!(
++        std::path::Path::new(stdout_path).exists(),
++        "expected mktemp to actually create {stdout_path}"
++    );
++}
++
++#[test]
++#[cfg(unix)]
++fn test_mktemp_dotdot_prefix_with_tmpdir_flag() {
++    // Same fix should apply when the template is passed via --tmpdir / -p.
++    let scene = TestScenario::new(util_name!());
++    let dir = tempdir().unwrap();
++
++    let result = scene
++        .ucmd()
++        .arg("-p")
++        .arg(dir.path())
++        .arg("..XXXXXX")
++        .succeeds();
++
++    let stdout_path = result.stdout_str().trim();
++    let file_name = std::path::Path::new(stdout_path)
++        .file_name()
++        .expect("output path should have a file name")
++        .to_str()
++        .expect("output path should be UTF-8");
++    assert!(
++        file_name.starts_with(".."),
++        "expected file name to start with '..', got {stdout_path}"
++    );
++}
+-- 
+2.43.0
+
