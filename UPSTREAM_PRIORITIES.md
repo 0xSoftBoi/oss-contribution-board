@@ -48,12 +48,40 @@ Small upstreams where a single unmaintained release blocks us.
   because `reqwest` (via `suwappudb-bridge`) breaks musl cross-compiles
   otherwise. Real friction, and upstreamable as at minimum a documentation fix.
 
+## Working protocol
+
+These are large Rust projects; a single `target/` runs 800MB-1GB and building
+several at once has already filled the disk and taken the machine down. So:
+
+1. Clone exactly one upstream at a time.
+2. Build, verify, commit, push to the fork, open the PR.
+3. Confirm the branch exists on the fork (`gh api repos/0xSoftBoi/<repo>/branches/<branch>`)
+   before deleting anything.
+4. `rm -rf` the clone. Then move to the next project.
+
+Never hold two upstream working copies at once.
+
 ## In flight
 
 - **[cberner/raptorq#228](https://github.com/cberner/raptorq/pull/228)** —
   builds wheels for Linux aarch64, macOS and Windows in CI. Fixes
-  [#220](https://github.com/cberner/raptorq/issues/220), open since May with no
-  PR. Tier 1 upstream, self-contained change, verified locally.
+  [#220](https://github.com/cberner/raptorq/issues/220). Verified locally, clone
+  deleted. Awaiting maintainer "Approve and run" for first-time-contributor CI.
+- **[cberner/redb#1408](https://github.com/cberner/redb/pull/1408)** —
+  implements `Value`/`Key` for the ten `NonZero` integer types. Fixes
+  [#873](https://github.com/cberner/redb/issues/873) for the half not blocked on
+  Rust specialization. fmt + clippy clean, no-std builds, 125/125 tests pass.
+  Clone deleted.
+
+## Queue
+
+Next targets, hardest reliance first. One at a time, per the protocol above.
+
+1. `rustpq/pqcrypto` — 0.1.x PQ crypto on the consensus signing path.
+2. `crate-crypto/rust-verkle` — unreleased git rev; goal is a crates.io release
+   so `production-verkle` can unpin.
+3. `gaiarobotics/aegis` — unowned pin in the request path.
+4. `python-telegram-bot` / `SQLAlchemy` — largest surface in suwappubot.
 
 ## Note unrelated to upstream
 
