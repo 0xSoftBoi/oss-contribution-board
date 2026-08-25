@@ -95,12 +95,17 @@ overlap can be pushed into a trait they already control.
 
 Next targets, hardest reliance first. One at a time, per the protocol above.
 
-1. `rustpq/pqcrypto` — **wind-down risk, needs a decision not a patch.** Upstream
-   [#97](https://github.com/rustpq/pqcrypto/issues/97) says PQClean is being
-   archived and the maintainer may retire the `pqcrypto` crates; there is already
-   a RUSTSEC advisory. Our ML-DSA/ML-KEM consensus signing path sits on this.
-   Migration target is RustCrypto's pure-Rust primitives. Raise with the project
-   lead before spending patch effort here.
+1. ~~`rustpq/pqcrypto`~~ — **resolved by migrating away, not by patching.**
+   Upstream [#97](https://github.com/rustpq/pqcrypto/issues/97) announced that
+   PQClean is being archived and the crates may be retired; RUSTSEC-2026-0161/
+   0162/0163 already flag them unmaintained. Rather than contribute to a dying
+   upstream, suwappu-dag and suwappu-db now use the pure-Rust RustCrypto
+   `ml-dsa` 0.1 / `ml-kem` 0.3 crates. Wire encodings are unchanged and the
+   equivalence is proved, not assumed, by `tests/pqclean_interop.rs`. pqcrypto
+   remains a dev-dependency only, so the advisories no longer touch shipped
+   code. **Still open:** `suwappu-lattice-protocol` uses the *Python* `pqcrypto`
+   package, which has no RustCrypto equivalent — that one needs a separate
+   decision (liboqs-python, or PyO3 bindings over the Rust crates).
 2. `crate-crypto/rust-verkle` — unreleased git rev; goal is a crates.io release
    so `production-verkle` can unpin.
 3. `gaiarobotics/aegis` — unowned pin in the request path.
