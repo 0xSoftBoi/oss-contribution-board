@@ -75,6 +75,12 @@ Never hold two upstream working copies at once.
 - **[cberner/redb#1409](https://github.com/cberner/redb/pull/1409)** — stacked on
   #1408; niche-encodes `Option<NonZero*>` at 4 bytes instead of 5. Closes the
   rest of #873. Clone deleted.
+- **[gaiarobotics/aegis#22](https://github.com/gaiarobotics/aegis/pull/22)** —
+  fixes quadratic regex backtracking in signature EV-001: a 160 KB single-line
+  input cost 19.6s of CPU in one regex, with no timeout, on the scanner step
+  that is the only part of `Shield.scan_input` not wrapped in `try/except`.
+  Bounding the gap makes it linear (0.043s, 450x). Found by measuring, not
+  reading. Clone deleted.
 
 ### On rust-lang/rust#31844
 
@@ -106,9 +112,18 @@ Next targets, hardest reliance first. One at a time, per the protocol above.
    code. **Still open:** `suwappu-lattice-protocol` uses the *Python* `pqcrypto`
    package, which has no RustCrypto equivalent — that one needs a separate
    decision (liboqs-python, or PyO3 bindings over the Rust crates).
-2. `crate-crypto/rust-verkle` — unreleased git rev; goal is a crates.io release
-   so `production-verkle` can unpin.
-3. `gaiarobotics/aegis` — unowned pin in the request path.
+2. `crate-crypto/rust-verkle` — **decision, not a patch.** `banderwagon`,
+   `ipa-multipoint` and `verkle-trie` are *not published on crates.io at all*,
+   so the raw-rev pin can never be resolved by a version bump. Upstream's last
+   push was 2024-10-25 (~2 years stale, 36 open issues, not archived), which
+   tracks Ethereum moving off Verkle tries. Mitigating factors: the pinned rev
+   still builds clean on Rust 1.93, and `production-verkle` is default-off. So
+   this is frozen-but-working. Real options are vendoring the ~26 call sites,
+   or dropping the feature — not an upstream contribution.
+3. ~~`gaiarobotics/aegis`~~ — pin is identical to upstream HEAD, so not
+   stale; the risk is bus-factor (4 stars, third-party, in the request path).
+   First contribution landed as #22 above. The fork named in suwappubot's
+   `requirements.in` comment still does not exist.
 4. `python-telegram-bot` / `SQLAlchemy` — largest surface in suwappubot.
 
 ## Note unrelated to upstream
