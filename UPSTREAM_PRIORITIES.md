@@ -91,6 +91,19 @@ Never hold two upstream working copies at once.
   [#5338](https://github.com/python-telegram-bot/python-telegram-bot/issues/5338).
   Two regression tests, both failing without the fix. Clone deleted.
 
+### Internal PRs opened from this work
+
+Not upstream, but they were sitting uncommitted on one disk, which is worse
+than any of the upstream risks tracked above:
+
+- **[Suwappu-Labs/suwappu-dag#77](https://github.com/Suwappu-Labs/suwappu-dag/pull/77)** —
+  ML-DSA-65 / ML-KEM-768 off `pqcrypto` onto RustCrypto, with both-directions
+  interop proof against PQClean. 697 tests pass.
+- **[Suwappu-Labs/suwappu-db#8](https://github.com/Suwappu-Labs/suwappu-db/pull/8)** —
+  the same for anchor credential verification.
+- **[Suwappu-Labs/suwappu-lattice-protocol#65](https://github.com/Suwappu-Labs/suwappu-lattice-protocol/pull/65)** —
+  documents and guards the `pqcrypto <0.5` pin against the 1.x backend swap.
+
 ### On rust-lang/rust#31844
 
 The maintainer cited [specialization](https://github.com/rust-lang/rust/issues/31844)
@@ -118,9 +131,32 @@ Next targets, hardest reliance first. One at a time, per the protocol above.
    `ml-dsa` 0.1 / `ml-kem` 0.3 crates. Wire encodings are unchanged and the
    equivalence is proved, not assumed, by `tests/pqclean_interop.rs`. pqcrypto
    remains a dev-dependency only, so the advisories no longer touch shipped
-   code. **Still open:** `suwappu-lattice-protocol` uses the *Python* `pqcrypto`
-   package, which has no RustCrypto equivalent — that one needs a separate
-   decision (liboqs-python, or PyO3 bindings over the Rust crates).
+   code. **Correction on the Python side:** I previously recorded that
+   `suwappu-lattice-protocol`'s *Python* `pqcrypto` had no maintained
+   equivalent and needed a migration decision. That was wrong — the PyPI
+   package is a different project from the Rust crates
+   ([backbone-hq/pqcrypto](https://github.com/backbone-hq/pqcrypto),
+   Apache-2.0, 0 open issues) and it is actively developed: **1.0.0 shipped
+   2026-08-15** with abi3 wheels for macOS, manylinux, musllinux and Windows.
+
+   The correct action is the opposite of a migration: **keep the `<0.5` pin.**
+   1.0.0 is not an API rename, it is a reimplementation. 0.4.x is CFFI over
+   PQClean's C reference code — which is what LTP-A-014's KyberSlash
+   provenance test asserts (`PQCLEAN_MLKEM768_CLEAN_*`). 1.0.0 is a single
+   PyO3 extension over `backbone-ml-kem` / `backbone-ml-dsa` 0.2.0, the
+   maintainer's own forks of RustCrypto's, at **~310 downloads each against
+   5.2M / 2.0M** for the upstreams they fork.
+
+   The hazard is that the upgrade is seamless: I verified 0.4 and 1.0 are
+   byte-compatible in *both* directions (identical FIPS 203/204 sizes, each
+   version's ciphertext decapsulating to the same shared secret under the
+   other, each version's signatures verifying under the other). Nothing fails
+   loudly; only the provenance changes. Documented and guarded in
+   [suwappu-lattice-protocol#65](https://github.com/Suwappu-Labs/suwappu-lattice-protocol/pull/65).
+
+   Generalizable lesson: "unmaintained" was inferred from the *Rust* crates
+   sharing a name and a C backend. Same name, same PQClean lineage, different
+   project, opposite health. Check the actual distribution before ruling on it.
 2. `crate-crypto/rust-verkle` — **decision, not a patch.** `banderwagon`,
    `ipa-multipoint` and `verkle-trie` are *not published on crates.io at all*,
    so the raw-rev pin can never be resolved by a version bump. Upstream's last
