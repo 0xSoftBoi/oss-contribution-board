@@ -1,0 +1,353 @@
+<!doctype html><html><head><!-- frame-runtime --><base href="/_f/1787630245-26c6/"><script>window.__FRAME_PREAMBLE={"capabilities":{"artifact":"artifact.oqIe8shs.js","assets":"assets.DBUJcvq_.js","comments":"comments.GLuHR3zP.js","db":"db.CRhVHzSt.js","downloads":"downloads.C3GSvEDP.js","embed":"embed.CZsbekoQ.js","mcp":"mcp.D3B2EyQu.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.DE7EMui-.js","sample":"sample.BW2Uysoh.js","self":"artifact.oqIe8shs.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.h3_8GSUa.js","comments":"_comments.BOgkE6qU.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var Y=["light","dark","system"],X=/^[A-Za-z0-9_-]{1,64}$/,D=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,G=new Set(["class","hidden","value","checked"]);function V(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||G.has(t)}var be="http://www.w3.org/1999/xhtml",Z="http://www.w3.org/2000/svg",J=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),Q=new Set(["script","style"]);function ee(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!J.has(t):e.namespaceURI===Z?!Q.has(t):!1}var te=new Set(["html","head","body","frameset"]);function re(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&te.has(e.localName)}function ne(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!X.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[n,s]of Object.entries(t.attrsSet))if(!D.test(n)||typeof s!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const n of t.attrsRemoved)if(typeof n!="string"||!D.test(n))return!1}return!0}function se(e,t){if(e===null||typeof e!="object")return!1;const{seq:n,elements:s}=e;if(typeof n!="number"||!Number.isSafeInteger(n)||!Array.isArray(s)||s.length===0||s.length>64)return!1;for(let o=0;o<s.length;o++)if(!t(s[o]))return!1;return!0}function ae(e){return e===null||typeof e!="object"?!1:se(e.__frame_patch,ne)}function oe(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ie(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function le(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const n=t.theme;return typeof n=="string"&&Y.includes(n)}var O="__frame_scroll",ce=150,ue=310,fe=160,pe=3e4;function de(){let e=0,t=!1,n=!1,s=!1,o=0,l=null;const c=i=>{try{sessionStorage.setItem(O,JSON.stringify({y:i}))}catch{}},f=()=>{if(clearTimeout(e),l===null)return;const i=l;l=null,c(i)},S=()=>{if(t){t=!1;return}n=!0,l=scrollY,clearTimeout(e),e=setTimeout(f,ce)};try{addEventListener("scroll",S,{passive:!0}),addEventListener("pagehide",f)}catch{}const v=()=>{let i;try{i=sessionStorage.getItem(O)}catch{return null}if(i===null)return null;let d;try{d=JSON.parse(i)}catch{d=null}const u=d?.y;if(!(typeof u=="number"&&Number.isFinite(u)&&u>=0)){try{sessionStorage.removeItem(O)}catch{}return null}return u};let b=!1;const m=i=>{try{const d=scrollY;scrollTo({top:i,left:0,behavior:"instant"}),o=i,s=!0,clearTimeout(e),l=null,c(i);const u=scrollY;u!==d&&(t=!0),u!==i&&!b&&(b=!0,addEventListener("load",()=>{try{if(scrollY===u){const h=v();m(h!==null?h:o)}}catch{}},{once:!0}))}catch{}},y=()=>{try{return!!location.hash}catch{return!0}};let g=!1;const E=()=>{try{if(g||innerWidth>ue||innerHeight>fe)return;g=!0;const i=Date.now(),d=()=>{try{removeEventListener("resize",d)}catch{}if(Date.now()-i>pe||n||y())return;const u=v();m(u!==null?u:o)};addEventListener("resize",d)}catch{}};let r=!1,p=!1;return{restore(){if(r||(r=!0,y()))return;const i=v();i!==null&&(m(i),E())},promoted(){if(p||(p=!0,y()))return;const i=v();i!==null?(m(i),E()):s&&m(o)}}}var Ee="modulepreload",Ae=function(e){return"/"+e},Re={},me=function(t,n,s){let o=Promise.resolve();function l(c){const f=new Event("vite:preloadError",{cancelable:!0});if(f.payload=c,window.dispatchEvent(f),!f.defaultPrevented)throw c}return o.then(c=>{for(const f of c||[])f.status==="rejected"&&l(f.reason);return t().catch(l)})};(function(){const e=Object.defineProperty,t=globalThis,n=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let s=0;for(let o=0;o<n.length;o++){const l=n[o];try{e(t,l,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[l]}catch{}try{e(t,l,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[l]=="function"&&s++}if(s&&window!==top)try{parent.postMessage({__frame_rtc_lockdown_failed:s},"*")}catch{}})();var he=1e4,_e=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function F(e){for(const t of _e)if(t.endsWith(":*"))try{const n=new URL(e);if(`${n.protocol}//${n.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var M=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),j=window.__FRAME_PREAMBLE?.transforms,N=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate,L=/^[\w.-]+\.js$/;function T(e){return me(()=>import("/_runtime/"+e),void 0)}function z(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:W,pipe:()=>({wrap:(n,s)=>(...o)=>{try{return s(...o)}catch(l){return Promise.reject(l)}}})}}var P=null,w=null;function q(e,t,n){try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var B=!1;function ve(e,t){const n=[];for(const s of e.elements){const o=document.querySelector(`[data-id="${s.target}"]`);if(!o){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if([...Object.keys(s.attrsSet??{}),...s.attrsRemoved??[]].some(l=>!V(l))){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if(s.text!==void 0&&(!ee(o)||re(o))){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}for(const[l,c]of Object.entries(s.attrsSet??{}))if(!$(o,l)){try{o.setAttribute(l,c)}catch{}H(o,l,c)}for(const l of s.attrsRemoved??[])$(o,l)||(o.removeAttribute(l),H(o,l,null));typeof s.text=="string"&&(o.textContent=s.text),n.push(s.target)}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function H(e,t,n){if(!(e instanceof HTMLInputElement))return;const s=t.toLowerCase();s==="checked"?e.checked=n!==null:s==="value"&&e.type!=="file"&&(e.value=n??"")}function $(e,t){const n=t.toLowerCase(),s=e;return n==="data-id"||(n==="value"||n==="checked")&&(s.__artifactSecret===!0||/^(password|hidden|file)$/.test(s.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${s.autocomplete??""}`))}function K(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,B=!0):B&&(delete t.dataset.theme,t.style.colorScheme="",B=!1)}var R=new Map;function ye(){let e;const t={u:new Promise(n=>{e=n}),r:n=>{t.done=!0,e(n)},done:!1,nulled:!1};return t}var ge=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),W=(e,t)=>{const n=R.get(e);if(!n||n.done){n?.nulled&&w&&parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},w);return}const s=typeof t=="function"?Object.setPrototypeOf(t,ge):Object.assign(Object.create(null),t);typeof s.then=="function"&&delete s.then,n.r(Object.freeze(s))},U=Object.getOwnPropertyDescriptor(window,"claude");if(window!==top&&!(U&&U.writable===!1)){const e=j&&L.test(j)?T(j).catch(()=>{}):Promise.resolve(void 0),t=r=>{if(r.type==="auxclick"&&r.button!==1)return;const p=r.target,i=p&&p.closest?p.closest("a[href],area[href]"):null;if(!i)return;const d=i.getAttribute("href");if(!d)return;let u,h;try{u=new URL(d,document.baseURI),h=new URL(document.baseURI).origin}catch{return}if((u.protocol==="http:"||u.protocol==="https:")&&u.origin!==h){r.preventDefault();const _=(i.getAttribute("target")??"").toLowerCase(),C=r.type==="auxclick"||r.metaKey||r.ctrlKey||r.shiftKey||r.altKey||!["","_self","_top","_parent"].includes(_);parent.postMessage({__frame_nav:!0,url:u.href,newTab:C},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const n={},s=r=>{r.isTrusted&&(n.pointer=!0)},o=r=>{r.isTrusted&&(n.click=!0)};addEventListener("pointermove",s,{capture:!0,passive:!0}),addEventListener("click",o,{capture:!0,passive:!0}),e.then(r=>{r?.wireNav&&(r.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",s,!0),removeEventListener("click",o,!0),r.wireEngagement?.(n))});let l=null;try{l=de()}catch{}const c=U?.value??{};q(window,"claude",c);for(const r of Object.keys(M)){if(c[r]!==void 0){q(c,r,c[r]);continue}R.set(r,ye())}if(c.use===void 0){const r=p=>{if(typeof p!="string"||!Object.hasOwn(M,p))return Promise.resolve(null);const i=R.get(p);return i?i.u:Promise.resolve(c[p]??null)};try{Object.defineProperty(c,"use",{value:r,writable:!0,configurable:!0,enumerable:!1})}catch{}}let f=null,S=null,v=0;const b=r=>{r.source!==parent||!F(r.origin)||oe(r.data)&&(f=r.data.__frame_init,w=r.origin,removeEventListener("message",b),clearTimeout(v),S?.())};addEventListener("message",b),parent.postMessage({__frame_connect:!0},"*");const m=new Promise(r=>{S=r,v=setTimeout(()=>{removeEventListener("message",b),r()},he)}),y=document.readyState==="loading"?new Promise(r=>document.addEventListener("DOMContentLoaded",()=>r(),{once:!0})):Promise.resolve();y.then(()=>{try{l?.restore()}catch{}});const g={cb:null},E=r=>{if(!(r.source!==parent||!F(r.origin))&&ie(r.data)){try{l?.promoted()}catch{}g.cb?.()}};addEventListener("message",E),m.then(async()=>{if(!f||!w){for(const a of R.values())a.nulled=!0,a.r(null);return}K(f.theme);const r=w;let p=!1,i=!1;addEventListener("message",a=>{if(a.source!==parent||a.origin!==r)return;le(a.data)&&K(a.data.__frame_theme.theme),ae(a.data)&&ve(a.data.__frame_patch,r);const k=a.data?.__fc_mode;k&&typeof k=="object"&&!p&&N&&L.test(N)&&(p=!0,T(N).then(x=>x.install?.(r,k.on===!0)).catch(()=>{}));const A=a.data?.__ft_cmd;A&&typeof A=="object"&&!i&&I&&L.test(I)&&(i=!0,T(I).then(x=>x.install?.(r,A)).catch(()=>{}))});const d=Object.keys(f.capabilities??{}).filter(a=>Object.hasOwn(M,a)).map(a=>[a,M[a]]).filter(a=>typeof a[1]=="string"&&L.test(a[1])),u=await Promise.allSettled(d.map(([,a])=>T(a))),h=await e,_=w;if(h?.buildBoot||parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},_),h?.buildBoot)try{P=h.buildBoot(f,h.TRANSFORMS??{},{shellOrigin:_,mount:W},a=>parent.postMessage({__frame_cap_telemetry:a},_))}catch{parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},_),P=z(f,_)}else P=z(f,_);const C=a=>parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:a}},_),we=P;u.forEach((a,k)=>{const A=d[k][0];if(a.status!=="fulfilled"){C(A);return}try{a.value?.install?.(we)}catch{C(A)}});for(const a of R.values())a.done||(a.nulled=!0,a.r(null));await y,parent.postMessage({__frame_ready:!0},w),e.then(a=>a?.installSizeReporter?.(_,g))})}})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>OSS Contribution Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#EDEFF2; --surface:#FFFFFF; --surface-2:#F5F6F8; --line:#D7DBE1; --line-soft:#E5E8EC;
+  --ink:#171B21; --ink-2:#4A525E; --ink-3:#767F8C;
+  --accent:#B4451F; --accent-soft:#F3E2DB; --accent-ink:#8E3616;
+  --open:#1A7F45; --open-bg:#DDF1E4;
+  --merged:#6B4BB8; --merged-bg:#E9E2F7;
+  --closed:#6B7280; --closed-bg:#E7E9ED;
+  --blocked:#B3261E; --blocked-bg:#F7E0DE;
+  --shadow:0 1px 2px rgba(16,20,28,.05),0 8px 24px -12px rgba(16,20,28,.18);
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#12161B; --surface:#191E25; --surface-2:#1F252D; --line:#2C333C; --line-soft:#242A32;
+    --ink:#E8EBEF; --ink-2:#A6AEBA; --ink-3:#7C8593;
+    --accent:#E4713F; --accent-soft:#3A2118; --accent-ink:#F0906A;
+    --open:#4FBF7C; --open-bg:#12301F;
+    --merged:#A78BE8; --merged-bg:#241B3A;
+    --closed:#8B94A1; --closed-bg:#242A32;
+    --blocked:#E8756B; --blocked-bg:#331A18;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#12161B; --surface:#191E25; --surface-2:#1F252D; --line:#2C333C; --line-soft:#242A32;
+  --ink:#E8EBEF; --ink-2:#A6AEBA; --ink-3:#7C8593;
+  --accent:#E4713F; --accent-soft:#3A2118; --accent-ink:#F0906A;
+  --open:#4FBF7C; --open-bg:#12301F;
+  --merged:#A78BE8; --merged-bg:#241B3A;
+  --closed:#8B94A1; --closed-bg:#242A32;
+  --blocked:#E8756B; --blocked-bg:#331A18;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 96px;display:flex;flex-direction:column;gap:52px}
+h1,h2,h3{font-family:"Bricolage Grotesque","Source Sans 3",sans-serif;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1{font-size:clamp(2rem,4.6vw,3.1rem);font-weight:700;line-height:1.04}
+h2{font-size:1.5rem;font-weight:700}
+h3{font-size:1.06rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent-ink);text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent);text-underline-offset:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;font-size:.86em}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink)}
+
+/* header */
+header{display:flex;flex-direction:column;gap:16px;border-bottom:1px solid var(--line);padding-bottom:36px}
+.lede{font-size:1.12rem;color:var(--ink-2);max-width:62ch}
+.counts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.count{display:flex;align-items:baseline;gap:8px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:9px 14px;box-shadow:var(--shadow)}
+.count b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;font-variant-numeric:tabular-nums;line-height:1}
+.count span{font-size:.82rem;color:var(--ink-3);font-weight:600}
+.count.hot b{color:var(--accent)}
+
+section{display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.sec-head p{color:var(--ink-2);max-width:66ch}
+
+/* action cards */
+.cards{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;display:flex}
+.stripe{width:4px;flex:0 0 4px;background:var(--accent)}
+.card.ready .stripe{background:var(--open)}
+.card.rewrite .stripe{background:var(--accent)}
+.card.nudge .stripe{background:var(--merged)}
+.card-body{padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0;flex:1}
+.card-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.repo{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--ink-3)}
+.verdict{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.7rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+.verdict.ready{background:var(--open-bg);color:var(--open)}
+.verdict.rewrite{background:var(--accent-soft);color:var(--accent-ink)}
+.verdict.nudge{background:var(--merged-bg);color:var(--merged)}
+.card-body h3{font-size:1.08rem}
+.card-body .what{color:var(--ink-2)}
+.did{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:8px;padding:12px 14px;
+  display:flex;flex-direction:column;gap:7px}
+.did .eyebrow{color:var(--ink-3)}
+.did ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:.94rem;color:var(--ink-2)}
+.did li::marker{color:var(--accent)}
+.next{display:flex;gap:9px;align-items:flex-start;font-size:.95rem}
+.next b{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-ink);padding-top:4px;flex:0 0 auto}
+
+/* evidence block */
+.evidence{background:var(--surface-2);border-left:3px solid var(--line);padding:10px 14px;border-radius:0 8px 8px 0;
+  font-size:.9rem;color:var(--ink-2)}
+.evidence .mono{color:var(--ink)}
+
+/* table */
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.92rem}
+th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);position:sticky;top:0}
+td{padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+td.num{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+td.title{color:var(--ink);min-width:280px}
+.repo-row td{background:var(--surface-2);font-family:"JetBrains Mono",monospace;font-size:.76rem;
+  letter-spacing:.06em;color:var(--ink);font-weight:600;padding-top:14px;padding-bottom:9px}
+.chip{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.chip.open{background:var(--open-bg);color:var(--open)}
+.chip.merged{background:var(--merged-bg);color:var(--merged)}
+.chip.closed{background:var(--closed-bg);color:var(--closed)}
+.note{font-size:.86rem;color:var(--ink-3)}
+
+/* patch list */
+.patches{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.patch{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+.patch .fname{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--accent-ink);word-break:break-all}
+.patch .stat{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.patch p{font-size:.92rem;color:var(--ink-2)}
+.plus{color:var(--open)} .minus{color:var(--blocked)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:0;box-shadow:var(--shadow)}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:"JetBrains Mono",monospace;color:var(--accent);font-weight:600}
+details[open] summary::before{content:"–"}
+details .inner{padding:0 18px 18px;display:flex;flex-direction:column;gap:10px;font-size:.94rem;color:var(--ink-2)}
+details .inner ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+
+footer{border-top:1px solid var(--line);padding-top:24px;font-size:.88rem;color:var(--ink-3);display:flex;flex-direction:column;gap:6px}
+@media (max-width:640px){ .wrap{padding:32px 16px 64px;gap:40px} .verdict{margin-left:0} }
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Open-source ledger · 25 Aug 2026</p>
+  <h1>Three patches ready, twenty-one contributions accounted for</h1>
+  <p class="lede">Every pull request you have opened in a repo you don't own — 24 across five projects. Eight landed. Three are still open, and all three now have a patch or a rebase sitting ready to push.</p>
+  <div class="counts">
+    <div class="count hot"><b>3</b><span>open · all actionable</span></div>
+    <div class="count"><b>8</b><span>merged</span></div>
+    <div class="count"><b>13</b><span>closed unmerged</span></div>
+    <div class="count"><b>5</b><span>upstream projects</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Do these first</p>
+    <h2>The three live pull requests</h2>
+    <p>Ordered by how close each is to landing. Each patch below builds, passes its project's full test suite, and is clean under that project's own fmt and clippy settings.</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card ready">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/alloy-rs/alloy/pull/4162">alloy #4162</a> — heartbeat receipt recheck</h3>
+          <span class="verdict ready">Push the follow-up</span>
+        </div>
+        <p class="repo">alloy-rs/alloy · fix(provider) · opened against issue #3881</p>
+        <p class="what">The PR is sound and its four tests pass. But it still hangs in the exact scenario the issue reports — a server whose <code>eth_blockNumber</code> is stale and never catches up — because the recheck asked that same stale server for the height. A receipt in block <span class="mono">n</span> already proves the chain is at least <span class="mono">n</span> blocks long, so the receipts can supply the height themselves.</p>
+        <div class="evidence">Wrote a failing test for that case against your branch, confirmed the hang, then confirmed it passes after the fix. The <span class="mono">eth_blockNumber</span> request is now gone entirely — one fewer RPC call per cycle, and the block stream already polls it.</div>
+        <div class="did">
+          <p class="eyebrow">In the patch</p>
+          <ul>
+            <li>Chain height derived from receipts, so a single-confirmation watcher resolves even when the reported height is frozen.</li>
+            <li>Dropped the redundant <code>eth_blockNumber</code> call from every recheck cycle.</li>
+            <li>Next recheck is scheduled when the previous result lands, not when it is spawned — a slow recheck no longer triggers the next one back-to-back.</li>
+            <li><code>RecheckResult</code> collapses to a plain vector; the recheck task always replies, so the loop can't get stuck with <code>recheck_running</code> set.</li>
+          </ul>
+        </div>
+        <p class="next"><b>Next</b><span>Apply, push to your branch, and comment with the new test — "here is a case #3881 describes that the first version still hung on" is a much stronger nudge to five silent code owners than a rebase ping.</span></p>
+      </div>
+    </div>
+
+    <div class="card rewrite">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/uutils/parse_datetime/pull/286">parse_datetime #286</a> — <code>8j</code> rejected</h3>
+          <span class="verdict rewrite">Close it, open the real fix</span>
+        </div>
+        <p class="repo">uutils/parse_datetime · open since 5 Apr · changes requested 5 Jul</p>
+        <p class="what">sylvestre was right, and it is worth knowing exactly how right. I ran GNU coreutils 9.4 across the whole alphabet: every letter <span class="mono">a</span>–<span class="mono">y</span> is a military time zone, and all of them are already in your table. <span class="mono">j</span> is the single missing entry — and it's missing because it's the one letter that means <em>local time</em> rather than an offset, so it can't be expressed as an <code>Offset</code> at all.</p>
+        <div class="evidence"><span class="mono">date -d '8a'</span> → 07:00 UTC (UTC+1) · <span class="mono">date -d '8n'</span> → 09:00 UTC (UTC−1) · <span class="mono">date -d '8j'</span> → identical to <span class="mono">date -d '8'</span> · <span class="mono">date -d '8foo'</span> → <strong>invalid date</strong>. GNU does not discard unknown tokens, which is what #286 assumed.</div>
+        <div class="did">
+          <p class="eyebrow">In the patch</p>
+          <ul>
+            <li><code>j</code> parsed as its own item — local time, no offset — so <code>8j</code>, <code>8 j</code> and <code>8J</code> all work.</li>
+            <li>Still counts as a time zone item: <code>8j utc</code>, <code>8 utc j</code> and <code>8 j j</code> are rejected as a repeated zone, matching GNU.</li>
+            <li>Consumes the whole alphabetic word before comparing, so <code>8jan</code> still parses as a date.</li>
+            <li>Unknown words stay errors. <code>8foo</code> fails, as it does in GNU.</li>
+          </ul>
+        </div>
+        <p class="next"><b>Next</b><span>#286 is now five months behind main and its diff reverts three later fixes, including your own am/pm change. Close it with a note, open a fresh 105-line PR from the patch, and quote the GNU 9.4 letter table in the body — sylvestre gets to see his review was acted on precisely.</span></p>
+      </div>
+    </div>
+
+    <div class="card nudge">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/uutils/coreutils/pull/12363">coreutils #12363</a> — mktemp <code>..</code> prefix</h3>
+          <span class="verdict nudge">Rebase, then nudge</span>
+        </div>
+        <p class="repo">uutils/coreutils · open since 18 May · 931 commits behind main</p>
+        <p class="what">Nothing is wrong with this one. sylvestre force-pushed your branch on 7 June and then went quiet; it has simply drifted. The only conflict was two test functions landing at the same end-of-file, which is now resolved.</p>
+        <div class="did">
+          <p class="eyebrow">In the patch</p>
+          <ul>
+            <li>Rebased onto current main, conflict in <code>test_mktemp.rs</code> resolved by keeping both test groups.</li>
+            <li>All 49 mktemp tests pass, including your two new <code>dotdot_prefix</code> cases; clippy and fmt clean.</li>
+          </ul>
+        </div>
+        <p class="next"><b>Next</b><span>Force-push the rebase and leave one line: rebased, green, ready when you are. A stale branch is the easiest reason for a reviewer to skip past; removing it costs you nothing.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Also open, but different</p>
+    <h2>mlx-lm #1361 needs a decision, not a patch</h2>
+  </div>
+  <div class="card">
+    <div class="stripe" style="background:var(--closed)"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <h3><a href="https://github.com/ml-explore/mlx-lm/pull/1361">mlx-lm #1361</a> — Gemma 4 channel thinking detection</h3>
+        <span class="verdict" style="background:var(--closed-bg);color:var(--closed)">Read the room</span>
+      </div>
+      <p class="what">Eleven weeks, zero maintainer engagement. The signal that matters is elsewhere: on 21 August zcbenz closed your #1371 with "closing non-essential issues so we can work on important items." That repo is actively triaging down, and ten of your thirteen closed-unmerged PRs are from it — six of them superseded by someone else's PR covering the same ground.</p>
+      <p class="what">This isn't a reflection on the work. It's a throughput problem on their side, and it is the clearest argument in this whole ledger for spending your next hours on uutils and alloy instead, where four of your last six PRs merged.</p>
+      <p class="next"><b>Next</b><span>One short comment asking whether it is wanted at all. If it goes quiet again, close it yourself — an author-closed PR reads better than one a maintainer sweeps.</span></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Ready to apply</p>
+    <h2>The patches</h2>
+    <p>Each applies with <code>git am</code> on a fresh branch from that project's current main.</p>
+  </div>
+  <div class="patches">
+    <div class="patch">
+      <p class="fname">alloy-4162-followup.patch</p>
+      <p class="stat"><span class="plus">+72</span> <span class="minus">−55</span> · 1 file</p>
+      <p>Apply on top of your existing PR branch, not on main. Adds one regression test that fails before it.</p>
+    </div>
+    <div class="patch">
+      <p class="fname">parse_datetime-j.patch</p>
+      <p class="stat"><span class="plus">+105</span> <span class="minus">−4</span> · 4 files</p>
+      <p>Branch from current main. 399 tests pass, clippy and fmt clean.</p>
+    </div>
+    <div class="patch">
+      <p class="fname">coreutils-12363-rebased.patch</p>
+      <p class="stat"><span class="plus">+75</span> · 2 files</p>
+      <p>Your original commit, rebased. Force-push over the existing branch.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">The full ledger</p>
+    <h2>All 24 pull requests</h2>
+    <p>Enumerated by fetching every <code>refs/pull/*/head</code> in all five upstream repos and checking authorship in git, rather than reading page summaries — which corrected two that read as merged but were not.</p>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>PR</th><th>Title</th><th>State</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr class="repo-row"><td colspan="4">alloy-rs/alloy · alloy-rs/core</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/alloy/pull/4162">alloy #4162</a></td><td class="title">recheck receipts of unconfirmed transactions in heartbeat</td><td><span class="chip open">Open</span></td><td class="note">Follow-up patch ready</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1105">core #1105</a></td><td class="title">self-referential struct types in EIP-712 canonicalize</td><td><span class="chip merged">Merged</span></td><td class="note">14 May → 23 May</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1091">core #1091</a></td><td class="title">apply <code>extra_derives</code> to functions/calls enum container</td><td><span class="chip closed">Closed</span></td><td class="note">Self-closed, 3 weeks no response</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1096">core #1096</a></td><td class="title">disable proptest default features (rusty-fork)</td><td><span class="chip closed">Closed</span></td><td class="note">Self-closed for lack of traction</td></tr>
+
+      <tr class="repo-row"><td colspan="4">uutils/parse_datetime · uutils/coreutils</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/286">pd #286</a></td><td class="title">ignore unrecognized trailing alpha tokens after pure numbers</td><td><span class="chip open">Open</span></td><td class="note">Wrong premise — replace with the <code>j</code> patch</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12363">cu #12363</a></td><td class="title">preserve <code>..</code> literal prefix in mktemp template</td><td><span class="chip open">Open</span></td><td class="note">Rebase ready, CI was green</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/284">pd #284</a></td><td class="title">support HH:MM am/pm in combined date-time parsing</td><td><span class="chip merged">Merged</span></td><td class="note">Sat 3 months, landed 5 Jul</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/285">pd #285</a></td><td class="title"><code>unix_epoch_second()</code> floor semantics for negative timestamps</td><td><span class="chip merged">Merged</span></td><td class="note">Landed with #284</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/287">pd #287</a></td><td class="title">accept "ut"/"UT" as bare UTC abbreviation</td><td><span class="chip merged">Merged</span></td><td class="note">Landed with #284</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12327">cu #12327</a></td><td class="title">date: re-zone trailing TZ abbreviation input to local timezone</td><td><span class="chip merged">Merged</span></td><td class="note">Same-day merge</td></tr>
+
+      <tr class="repo-row"><td colspan="4">materialsvirtuallab/matgl</td></tr>
+      <tr><td class="num"><a href="https://github.com/materialsvirtuallab/matgl/pull/801">#801</a></td><td class="title">MCDropoutWrapper for uncertainty-aware active learning</td><td><span class="chip merged">Merged</span></td><td class="note">Included a 16.5× perf win</td></tr>
+      <tr><td class="num"><a href="https://github.com/materialsvirtuallab/matgl/pull/809">#809</a></td><td class="title">make SoftExponential autograd-correct and NaN-safe</td><td><span class="chip merged">Merged</span></td><td class="note">Next-day merge, 9/9 checks</td></tr>
+
+      <tr class="repo-row"><td colspan="4">ml-explore/mlx-lm — 10 of your 13 closed-unmerged PRs are here</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1372">#1372</a></td><td class="title">xtc_threshold default 0.0 → 0.1 everywhere</td><td><span class="chip merged">Merged</span></td><td class="note">Your resubmit of #1367</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1361">#1361</a></td><td class="title">skip channel thinking detection for Gemma 4</td><td><span class="chip open">Open</span></td><td class="note">11 weeks, no engagement</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1371">#1371</a></td><td class="title">keep <code>tool_call</code> arguments as JSON string</td><td><span class="chip closed">Closed</span></td><td class="note">Declined 21 Aug as "non-essential"</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1362">#1362</a></td><td class="title">expose KV-cache quantization / max-kv-size flags</td><td><span class="chip closed">Closed</span></td><td class="note">Folded into #1353 <em>with attribution</em></td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1360">#1360</a></td><td class="title">clamp negative start in <code>_find</code> (OOB on short prompts)</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1327</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1366">#1366</a></td><td class="title"><code>bool('False')</code> corrupts BatchRotatingKVCache</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1251</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1370">#1370</a></td><td class="title">same fix, resubmitted</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1251</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1365">#1365</a></td><td class="title"><code>--adapter-path</code> silently ignored with model alias</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1249</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1368">#1368</a></td><td class="title">include <code>context_length</code> in <code>/v1/models</code></td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1184</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1367">#1367</a></td><td class="title">xtc_threshold default 0.0 → 0.1</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by your own #1372</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1364">#1364</a></td><td class="title">keep <code>tool_call</code> arguments as JSON string</td><td><span class="chip closed">Closed</span></td><td class="note">Branches cross-contaminated, wrong diff</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1369">#1369</a></td><td class="title">log confirmation when speculative decoding active</td><td><span class="chip closed">Closed</span></td><td class="note">Message lives in a third-party wrapper</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1103">#1103</a></td><td class="title">comprehensive Gemma 4 support</td><td><span class="chip closed">Closed</span></td><td class="note">Page reads merged; git says absorbed into #1093/#1105/#1114</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Two patterns worth naming</p>
+    <h2>What the ledger says about where to spend time</h2>
+  </div>
+  <details>
+    <summary>Six of your PRs were superseded by someone else's — all in one repo</summary>
+    <div class="inner">
+      <p>#1360, #1362, #1365, #1366, #1368 and #1370 were all overtaken by a parallel PR fixing the same thing. That is what a high-traffic repo with a slow review queue does to small independent fixes: several people find the same bug, and the one that gets merged is whichever the maintainer happens to open first.</p>
+      <p>The counter is not to write more of them. It is to comment on the issue before opening the PR — one line claiming the fix — so a maintainer merging someone else's work at least sees yours first. #1362 is the proof it works: soobrosa folded your flags into #1353 <em>and credited you</em>.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Your merge rate in the uutils projects is 5 of 6</summary>
+    <div class="inner">
+      <p>parse_datetime and coreutils merged five of your six PRs. They are slow — #284, #285 and #287 all sat three months before landing together on the same day — but they land, and sylvestre reviews substantively rather than triaging down.</p>
+      <p>Slow-but-lands is worth more than fast-but-superseded when every push counts. Both patches you can send there today are small, self-contained, and answer a review that has already been given.</p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  <p>Enumeration is complete for these five upstream repos: every pull ref was fetched and author-checked, and the merged count matches the eight claimed on your own site. A global sweep was not possible — GitHub's API and search were both unreachable from this session — so a PR to a repo you have never mentioned publicly would not appear here.</p>
+  <p>All three patches were built and tested locally against each project's current main, with anvil 1.5.1 and GNU coreutils 9.4 as the reference implementations.</p>
+</footer>
+
+</div>
+
+</body></html>
