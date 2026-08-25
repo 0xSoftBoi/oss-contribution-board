@@ -132,6 +132,39 @@ Seven other git deps across the repos already use `rev`. No Python
 dependency uses a VCS URL; all come from PyPI. Left alone deliberately:
 changing them spans three repos and is a policy call.
 
+### raptorq: a panic on untrusted packet bytes
+
+`EncodingPacket::deserialize` indexes `data[0..4]` with no length check, so
+anything shorter than the RFC 6330 §4.4.2 FEC Payload ID panics rather than
+failing to decode. Its two siblings in the same module take fixed-size arrays
+(`PayloadId` `&[u8; 4]`, `ObjectTransmissionInformation` `&[u8; 12]`) and so
+enforce length in the type system — `EncodingPacket` is the only one taking a
+slice, and the only one that can fail at runtime.
+
+Reported as [#229](https://github.com/cberner/raptorq/issues/229), fixed
+additively in [#230](https://github.com/cberner/raptorq/pull/230) with
+`try_deserialize -> Option<EncodingPacket>`.
+
+Our side is fixed independently rather than waiting on a release
+([suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80)).
+**Accurately: this was not a live remote DoS.** `reconstruct()` has no callers
+outside tests while the transport is the in-memory phase-1 one. But
+`Shred::from_bytes` is public and documented as taking on-wire bytes, so the
+trap is armed for the first networked caller. Checking reachability before
+writing it up was the difference between a real finding and an overclaim.
+
+### Open question for the owner — license
+
+`suwappu-lattice-protocol` declares `license = "MIT"` in `pyproject.toml`, and
+the README says MIT in three places (badge, tree comment, License section).
+The `LICENSE` file is **Elastic License 2.0**, © 2026 Jas Strokus.
+
+Three artifacts say MIT, one says Elastic 2.0, and the two directions are not
+symmetric: correcting the metadata to Elastic-2.0 *restricts* rights, while
+correcting `LICENSE` to MIT *grants* them. That is an ownership decision with
+legal consequences and not one to infer from a file count, so it is flagged
+rather than fixed. It also blocks any PyPI publish while inconsistent.
+
 ### Internal PRs opened from this work
 
 Not upstream, but they were sitting uncommitted on one disk, which is worse
@@ -144,6 +177,8 @@ than any of the upstream risks tracked above:
   the same for anchor credential verification.
 - **[Suwappu-Labs/suwappu-db#9](https://github.com/Suwappu-Labs/suwappu-db/pull/9)** —
   Move VM bumped v1.44.9 → v1.48.7 and repinned by immutable rev.
+- **[Suwappu-Labs/suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80)** —
+  skip truncated shreds in `reconstruct` instead of panicking.
 - **[Suwappu-Labs/suwappu-lattice-protocol#65](https://github.com/Suwappu-Labs/suwappu-lattice-protocol/pull/65)** —
   documents and guards the `pqcrypto <0.5` pin against the 1.x backend swap.
 
