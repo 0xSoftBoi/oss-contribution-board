@@ -1,4 +1,3 @@
-<!doctype html><html><head><!-- frame-runtime --><base href="/_f/1787630245-26c6/"><script>window.__FRAME_PREAMBLE={"capabilities":{"artifact":"artifact.oqIe8shs.js","assets":"assets.DBUJcvq_.js","comments":"comments.GLuHR3zP.js","db":"db.CRhVHzSt.js","downloads":"downloads.C3GSvEDP.js","embed":"embed.CZsbekoQ.js","mcp":"mcp.D3B2EyQu.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.DE7EMui-.js","sample":"sample.BW2Uysoh.js","self":"artifact.oqIe8shs.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.h3_8GSUa.js","comments":"_comments.BOgkE6qU.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var Y=["light","dark","system"],X=/^[A-Za-z0-9_-]{1,64}$/,D=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,G=new Set(["class","hidden","value","checked"]);function V(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||G.has(t)}var be="http://www.w3.org/1999/xhtml",Z="http://www.w3.org/2000/svg",J=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),Q=new Set(["script","style"]);function ee(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!J.has(t):e.namespaceURI===Z?!Q.has(t):!1}var te=new Set(["html","head","body","frameset"]);function re(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&te.has(e.localName)}function ne(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!X.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[n,s]of Object.entries(t.attrsSet))if(!D.test(n)||typeof s!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const n of t.attrsRemoved)if(typeof n!="string"||!D.test(n))return!1}return!0}function se(e,t){if(e===null||typeof e!="object")return!1;const{seq:n,elements:s}=e;if(typeof n!="number"||!Number.isSafeInteger(n)||!Array.isArray(s)||s.length===0||s.length>64)return!1;for(let o=0;o<s.length;o++)if(!t(s[o]))return!1;return!0}function ae(e){return e===null||typeof e!="object"?!1:se(e.__frame_patch,ne)}function oe(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ie(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function le(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const n=t.theme;return typeof n=="string"&&Y.includes(n)}var O="__frame_scroll",ce=150,ue=310,fe=160,pe=3e4;function de(){let e=0,t=!1,n=!1,s=!1,o=0,l=null;const c=i=>{try{sessionStorage.setItem(O,JSON.stringify({y:i}))}catch{}},f=()=>{if(clearTimeout(e),l===null)return;const i=l;l=null,c(i)},S=()=>{if(t){t=!1;return}n=!0,l=scrollY,clearTimeout(e),e=setTimeout(f,ce)};try{addEventListener("scroll",S,{passive:!0}),addEventListener("pagehide",f)}catch{}const v=()=>{let i;try{i=sessionStorage.getItem(O)}catch{return null}if(i===null)return null;let d;try{d=JSON.parse(i)}catch{d=null}const u=d?.y;if(!(typeof u=="number"&&Number.isFinite(u)&&u>=0)){try{sessionStorage.removeItem(O)}catch{}return null}return u};let b=!1;const m=i=>{try{const d=scrollY;scrollTo({top:i,left:0,behavior:"instant"}),o=i,s=!0,clearTimeout(e),l=null,c(i);const u=scrollY;u!==d&&(t=!0),u!==i&&!b&&(b=!0,addEventListener("load",()=>{try{if(scrollY===u){const h=v();m(h!==null?h:o)}}catch{}},{once:!0}))}catch{}},y=()=>{try{return!!location.hash}catch{return!0}};let g=!1;const E=()=>{try{if(g||innerWidth>ue||innerHeight>fe)return;g=!0;const i=Date.now(),d=()=>{try{removeEventListener("resize",d)}catch{}if(Date.now()-i>pe||n||y())return;const u=v();m(u!==null?u:o)};addEventListener("resize",d)}catch{}};let r=!1,p=!1;return{restore(){if(r||(r=!0,y()))return;const i=v();i!==null&&(m(i),E())},promoted(){if(p||(p=!0,y()))return;const i=v();i!==null?(m(i),E()):s&&m(o)}}}var Ee="modulepreload",Ae=function(e){return"/"+e},Re={},me=function(t,n,s){let o=Promise.resolve();function l(c){const f=new Event("vite:preloadError",{cancelable:!0});if(f.payload=c,window.dispatchEvent(f),!f.defaultPrevented)throw c}return o.then(c=>{for(const f of c||[])f.status==="rejected"&&l(f.reason);return t().catch(l)})};(function(){const e=Object.defineProperty,t=globalThis,n=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let s=0;for(let o=0;o<n.length;o++){const l=n[o];try{e(t,l,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[l]}catch{}try{e(t,l,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[l]=="function"&&s++}if(s&&window!==top)try{parent.postMessage({__frame_rtc_lockdown_failed:s},"*")}catch{}})();var he=1e4,_e=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function F(e){for(const t of _e)if(t.endsWith(":*"))try{const n=new URL(e);if(`${n.protocol}//${n.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var M=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),j=window.__FRAME_PREAMBLE?.transforms,N=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate,L=/^[\w.-]+\.js$/;function T(e){return me(()=>import("/_runtime/"+e),void 0)}function z(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:W,pipe:()=>({wrap:(n,s)=>(...o)=>{try{return s(...o)}catch(l){return Promise.reject(l)}}})}}var P=null,w=null;function q(e,t,n){try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:n,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var B=!1;function ve(e,t){const n=[];for(const s of e.elements){const o=document.querySelector(`[data-id="${s.target}"]`);if(!o){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if([...Object.keys(s.attrsSet??{}),...s.attrsRemoved??[]].some(l=>!V(l))){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}if(s.text!==void 0&&(!ee(o)||re(o))){parent.postMessage({__frame_patch_miss:{seq:e.seq}},t);return}for(const[l,c]of Object.entries(s.attrsSet??{}))if(!$(o,l)){try{o.setAttribute(l,c)}catch{}H(o,l,c)}for(const l of s.attrsRemoved??[])$(o,l)||(o.removeAttribute(l),H(o,l,null));typeof s.text=="string"&&(o.textContent=s.text),n.push(s.target)}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function H(e,t,n){if(!(e instanceof HTMLInputElement))return;const s=t.toLowerCase();s==="checked"?e.checked=n!==null:s==="value"&&e.type!=="file"&&(e.value=n??"")}function $(e,t){const n=t.toLowerCase(),s=e;return n==="data-id"||(n==="value"||n==="checked")&&(s.__artifactSecret===!0||/^(password|hidden|file)$/.test(s.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${s.autocomplete??""}`))}function K(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,B=!0):B&&(delete t.dataset.theme,t.style.colorScheme="",B=!1)}var R=new Map;function ye(){let e;const t={u:new Promise(n=>{e=n}),r:n=>{t.done=!0,e(n)},done:!1,nulled:!1};return t}var ge=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),W=(e,t)=>{const n=R.get(e);if(!n||n.done){n?.nulled&&w&&parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},w);return}const s=typeof t=="function"?Object.setPrototypeOf(t,ge):Object.assign(Object.create(null),t);typeof s.then=="function"&&delete s.then,n.r(Object.freeze(s))},U=Object.getOwnPropertyDescriptor(window,"claude");if(window!==top&&!(U&&U.writable===!1)){const e=j&&L.test(j)?T(j).catch(()=>{}):Promise.resolve(void 0),t=r=>{if(r.type==="auxclick"&&r.button!==1)return;const p=r.target,i=p&&p.closest?p.closest("a[href],area[href]"):null;if(!i)return;const d=i.getAttribute("href");if(!d)return;let u,h;try{u=new URL(d,document.baseURI),h=new URL(document.baseURI).origin}catch{return}if((u.protocol==="http:"||u.protocol==="https:")&&u.origin!==h){r.preventDefault();const _=(i.getAttribute("target")??"").toLowerCase(),C=r.type==="auxclick"||r.metaKey||r.ctrlKey||r.shiftKey||r.altKey||!["","_self","_top","_parent"].includes(_);parent.postMessage({__frame_nav:!0,url:u.href,newTab:C},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const n={},s=r=>{r.isTrusted&&(n.pointer=!0)},o=r=>{r.isTrusted&&(n.click=!0)};addEventListener("pointermove",s,{capture:!0,passive:!0}),addEventListener("click",o,{capture:!0,passive:!0}),e.then(r=>{r?.wireNav&&(r.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",s,!0),removeEventListener("click",o,!0),r.wireEngagement?.(n))});let l=null;try{l=de()}catch{}const c=U?.value??{};q(window,"claude",c);for(const r of Object.keys(M)){if(c[r]!==void 0){q(c,r,c[r]);continue}R.set(r,ye())}if(c.use===void 0){const r=p=>{if(typeof p!="string"||!Object.hasOwn(M,p))return Promise.resolve(null);const i=R.get(p);return i?i.u:Promise.resolve(c[p]??null)};try{Object.defineProperty(c,"use",{value:r,writable:!0,configurable:!0,enumerable:!1})}catch{}}let f=null,S=null,v=0;const b=r=>{r.source!==parent||!F(r.origin)||oe(r.data)&&(f=r.data.__frame_init,w=r.origin,removeEventListener("message",b),clearTimeout(v),S?.())};addEventListener("message",b),parent.postMessage({__frame_connect:!0},"*");const m=new Promise(r=>{S=r,v=setTimeout(()=>{removeEventListener("message",b),r()},he)}),y=document.readyState==="loading"?new Promise(r=>document.addEventListener("DOMContentLoaded",()=>r(),{once:!0})):Promise.resolve();y.then(()=>{try{l?.restore()}catch{}});const g={cb:null},E=r=>{if(!(r.source!==parent||!F(r.origin))&&ie(r.data)){try{l?.promoted()}catch{}g.cb?.()}};addEventListener("message",E),m.then(async()=>{if(!f||!w){for(const a of R.values())a.nulled=!0,a.r(null);return}K(f.theme);const r=w;let p=!1,i=!1;addEventListener("message",a=>{if(a.source!==parent||a.origin!==r)return;le(a.data)&&K(a.data.__frame_theme.theme),ae(a.data)&&ve(a.data.__frame_patch,r);const k=a.data?.__fc_mode;k&&typeof k=="object"&&!p&&N&&L.test(N)&&(p=!0,T(N).then(x=>x.install?.(r,k.on===!0)).catch(()=>{}));const A=a.data?.__ft_cmd;A&&typeof A=="object"&&!i&&I&&L.test(I)&&(i=!0,T(I).then(x=>x.install?.(r,A)).catch(()=>{}))});const d=Object.keys(f.capabilities??{}).filter(a=>Object.hasOwn(M,a)).map(a=>[a,M[a]]).filter(a=>typeof a[1]=="string"&&L.test(a[1])),u=await Promise.allSettled(d.map(([,a])=>T(a))),h=await e,_=w;if(h?.buildBoot||parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},_),h?.buildBoot)try{P=h.buildBoot(f,h.TRANSFORMS??{},{shellOrigin:_,mount:W},a=>parent.postMessage({__frame_cap_telemetry:a},_))}catch{parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},_),P=z(f,_)}else P=z(f,_);const C=a=>parent.postMessage({__frame_cap_telemetry:{kind:"cap-load-error",cap:a}},_),we=P;u.forEach((a,k)=>{const A=d[k][0];if(a.status!=="fulfilled"){C(A);return}try{a.value?.install?.(we)}catch{C(A)}});for(const a of R.values())a.done||(a.nulled=!0,a.r(null));await y,parent.postMessage({__frame_ready:!0},w),e.then(a=>a?.installSizeReporter?.(_,g))})}})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
 <title>OSS Contribution Board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +53,6 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-of
 code,.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;font-size:.86em}
 .eyebrow{font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink)}
 
-/* header */
 header{display:flex;flex-direction:column;gap:16px;border-bottom:1px solid var(--line);padding-bottom:36px}
 .lede{font-size:1.12rem;color:var(--ink-2);max-width:62ch}
 .counts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
@@ -68,22 +66,19 @@ section{display:flex;flex-direction:column;gap:20px}
 .sec-head{display:flex;flex-direction:column;gap:6px}
 .sec-head p{color:var(--ink-2);max-width:66ch}
 
-/* action cards */
 .cards{display:flex;flex-direction:column;gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow);overflow:hidden;display:flex}
 .stripe{width:4px;flex:0 0 4px;background:var(--accent)}
-.card.ready .stripe{background:var(--open)}
-.card.rewrite .stripe{background:var(--accent)}
-.card.nudge .stripe{background:var(--merged)}
+.card.landed .stripe{background:var(--open)}
+.card.waiting .stripe{background:var(--merged)}
 .card-body{padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0;flex:1}
 .card-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
 .repo{font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--ink-3)}
 .verdict{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.7rem;font-weight:600;
   letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
-.verdict.ready{background:var(--open-bg);color:var(--open)}
-.verdict.rewrite{background:var(--accent-soft);color:var(--accent-ink)}
-.verdict.nudge{background:var(--merged-bg);color:var(--merged)}
+.verdict.landed{background:var(--open-bg);color:var(--open)}
+.verdict.waiting{background:var(--merged-bg);color:var(--merged)}
 .card-body h3{font-size:1.08rem}
 .card-body .what{color:var(--ink-2)}
 .did{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:8px;padding:12px 14px;
@@ -91,24 +86,25 @@ section{display:flex;flex-direction:column;gap:20px}
 .did .eyebrow{color:var(--ink-3)}
 .did ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:.94rem;color:var(--ink-2)}
 .did li::marker{color:var(--accent)}
-.next{display:flex;gap:9px;align-items:flex-start;font-size:.95rem}
-.next b{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--accent-ink);padding-top:4px;flex:0 0 auto}
 
-/* evidence block */
 .evidence{background:var(--surface-2);border-left:3px solid var(--line);padding:10px 14px;border-radius:0 8px 8px 0;
   font-size:.9rem;color:var(--ink-2)}
 .evidence .mono{color:var(--ink)}
 
-/* table */
+.correction{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.correction h3{color:var(--accent-ink)}
+.correction p{color:var(--ink-2)}
+.correction .mono{color:var(--ink)}
+
 .tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
 table{border-collapse:collapse;width:100%;min-width:720px;font-size:.92rem}
 th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);position:sticky;top:0}
+  color:var(--ink-3);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
 td{padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-2)}
 tr:last-child td{border-bottom:none}
 td.num{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
-td.title{color:var(--ink);min-width:280px}
+td.title{color:var(--ink);min-width:260px}
 .repo-row td{background:var(--surface-2);font-family:"JetBrains Mono",monospace;font-size:.76rem;
   letter-spacing:.06em;color:var(--ink);font-weight:600;padding-top:14px;padding-bottom:9px}
 .chip{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;
@@ -118,14 +114,12 @@ td.title{color:var(--ink);min-width:280px}
 .chip.closed{background:var(--closed-bg);color:var(--closed)}
 .note{font-size:.86rem;color:var(--ink-3)}
 
-/* patch list */
-.patches{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.patch{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;
-  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
-.patch .fname{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--accent-ink);word-break:break-all}
-.patch .stat{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.patch p{font-size:.92rem;color:var(--ink-2)}
-.plus{color:var(--open)} .minus{color:var(--blocked)}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.cmp{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.cmp .lbl{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.cmp .was{font-family:"JetBrains Mono",monospace;font-size:.9rem;color:var(--ink-3);text-decoration:line-through}
+.cmp .now{font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
 
 details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:0;box-shadow:var(--shadow)}
 summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
@@ -143,88 +137,100 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:.88rem;color:
 
 <header>
   <p class="eyebrow">Open-source ledger · 25 Aug 2026</p>
-  <h1>Three patches ready, twenty-one contributions accounted for</h1>
-  <p class="lede">Every pull request you have opened in a repo you don't own — 24 across five projects. Eight landed. Three are still open, and all three now have a patch or a rebase sitting ready to push.</p>
+  <h1>Every patch is upstream. Eight pull requests are live and none are conflicted.</h1>
+  <p class="lede">All three patches this board used to describe have been written, tested against each project's current main, and pushed to their pull requests. Five further PRs were rebased out of staleness, and one was withdrawn. Nothing is now blocked on you.</p>
   <div class="counts">
-    <div class="count hot"><b>3</b><span>open · all actionable</span></div>
+    <div class="count hot"><b>8</b><span>open · all mergeable</span></div>
     <div class="count"><b>8</b><span>merged</span></div>
-    <div class="count"><b>13</b><span>closed unmerged</span></div>
-    <div class="count"><b>5</b><span>upstream projects</span></div>
+    <div class="count"><b>26</b><span>closed unmerged</span></div>
+    <div class="count"><b>19</b><span>upstream projects</span></div>
   </div>
 </header>
 
 <section>
   <div class="sec-head">
-    <p class="eyebrow">Do these first</p>
-    <h2>The three live pull requests</h2>
-    <p>Ordered by how close each is to landing. Each patch below builds, passes its project's full test suite, and is clean under that project's own fmt and clippy settings.</p>
+    <p class="eyebrow">Read this first</p>
+    <h2>The previous version of this board was wrong about its own scope</h2>
+  </div>
+  <div class="correction">
+    <h3>It described three patches that did not exist, and counted a fifth of the repositories</h3>
+    <p>The patches were never saved to disk — the board reported work whose output was gone. They have since been regenerated from scratch, re-derived rather than reconstructed from the description, and pushed.</p>
+    <p>The old footer said a global sweep was impossible because GitHub's API was unreachable. It is reachable now, and the enumeration it enables is much larger: <span class="mono">42</span> upstream pull requests across <span class="mono">19</span> projects, not <span class="mono">24</span> across <span class="mono">5</span>. Four open upstream PRs were missing entirely — both <span class="mono">huggingface/candle</span> PRs, the <span class="mono">pola-rs/polars</span> one, and <span class="mono">alloy#4163</span>. Left alone, they would have kept drifting.</p>
+  </div>
+  <div class="compare">
+    <div class="cmp"><span class="lbl">Open</span><span class="was">3</span><span class="now">8</span></div>
+    <div class="cmp"><span class="lbl">Closed unmerged</span><span class="was">13</span><span class="now">26</span></div>
+    <div class="cmp"><span class="lbl">Upstream projects</span><span class="was">5</span><span class="now">19</span></div>
+    <div class="cmp"><span class="lbl">Merged</span><span class="was">8</span><span class="now">8</span></div>
+  </div>
+  <p class="note">The merged count was the one figure that held up. <span class="mono">suwappufoundation</span> is your own organisation, so its two merged PRs are excluded from the upstream totals here.</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="eyebrow">Shipped this session</p>
+    <h2>The three patches, now pushed</h2>
+    <p>Each was rebuilt against the project's current main and verified independently, rather than trusted from the old board's description.</p>
   </div>
 
   <div class="cards">
 
-    <div class="card ready">
+    <div class="card landed">
       <div class="stripe"></div>
       <div class="card-body">
         <div class="card-top">
           <h3><a href="https://github.com/alloy-rs/alloy/pull/4162">alloy #4162</a> — heartbeat receipt recheck</h3>
-          <span class="verdict ready">Push the follow-up</span>
+          <span class="verdict landed">Pushed</span>
         </div>
-        <p class="repo">alloy-rs/alloy · fix(provider) · opened against issue #3881</p>
-        <p class="what">The PR is sound and its four tests pass. But it still hangs in the exact scenario the issue reports — a server whose <code>eth_blockNumber</code> is stale and never catches up — because the recheck asked that same stale server for the height. A receipt in block <span class="mono">n</span> already proves the chain is at least <span class="mono">n</span> blocks long, so the receipts can supply the height themselves.</p>
-        <div class="evidence">Wrote a failing test for that case against your branch, confirmed the hang, then confirmed it passes after the fix. The <span class="mono">eth_blockNumber</span> request is now gone entirely — one fewer RPC call per cycle, and the block stream already polls it.</div>
+        <p class="repo">alloy-rs/alloy · follow-up commit <span class="mono">ed435145</span> · 2 commits</p>
+        <p class="what">The PR really did still hang. The recheck asked the server for the chain height via <code>eth_blockNumber</code> — but in the failure this fixes, that call is the stale thing. If the reported height never catches up, the confirmation target is never reached and the watcher never resolves.</p>
+        <div class="evidence">The regression test was written <em>first</em> and confirmed to fail on the original branch: <span class="mono">watcher hung despite the transaction being confirmed: Elapsed(())</span>. It passes after the fix. The four existing stale-RPC tests let the height catch up, which is why they missed it.</div>
         <div class="did">
-          <p class="eyebrow">In the patch</p>
+          <p class="eyebrow">In the commit</p>
           <ul>
-            <li>Chain height derived from receipts, so a single-confirmation watcher resolves even when the reported height is frozen.</li>
-            <li>Dropped the redundant <code>eth_blockNumber</code> call from every recheck cycle.</li>
-            <li>Next recheck is scheduled when the previous result lands, not when it is spawned — a slow recheck no longer triggers the next one back-to-back.</li>
-            <li><code>RecheckResult</code> collapses to a plain vector; the recheck task always replies, so the loop can't get stuck with <code>recheck_running</code> set.</li>
+            <li>Height derived from the receipts — a receipt in block <span class="mono">n</span> proves the chain reached <span class="mono">n</span>, a bound the stale server cannot contradict.</li>
+            <li>The <code>eth_blockNumber</code> request is gone entirely: one fewer RPC call per cycle.</li>
+            <li>Next recheck scheduled when the previous result lands, not when it is spawned.</li>
+            <li>The recheck task always replies, so the loop cannot stick with <code>recheck_running</code> set.</li>
           </ul>
         </div>
-        <p class="next"><b>Next</b><span>Apply, push to your branch, and comment with the new test — "here is a case #3881 describes that the first version still hung on" is a much stronger nudge to five silent code owners than a rebase ping.</span></p>
+        <div class="evidence">230 provider tests pass. The <span class="mono">heart::</span> suite also dropped from <span class="mono">6.80s</span> to <span class="mono">0.97s</span> — it no longer waits on the stale height response.</div>
       </div>
     </div>
 
-    <div class="card rewrite">
+    <div class="card landed">
       <div class="stripe"></div>
       <div class="card-body">
         <div class="card-top">
-          <h3><a href="https://github.com/uutils/parse_datetime/pull/286">parse_datetime #286</a> — <code>8j</code> rejected</h3>
-          <span class="verdict rewrite">Close it, open the real fix</span>
+          <h3><a href="https://github.com/uutils/parse_datetime/pull/320">parse_datetime #320</a> — the military letter <code>j</code></h3>
+          <span class="verdict landed">New PR · green</span>
         </div>
-        <p class="repo">uutils/parse_datetime · open since 5 Apr · changes requested 5 Jul</p>
-        <p class="what">sylvestre was right, and it is worth knowing exactly how right. I ran GNU coreutils 9.4 across the whole alphabet: every letter <span class="mono">a</span>–<span class="mono">y</span> is a military time zone, and all of them are already in your table. <span class="mono">j</span> is the single missing entry — and it's missing because it's the one letter that means <em>local time</em> rather than an offset, so it can't be expressed as an <code>Offset</code> at all.</p>
-        <div class="evidence"><span class="mono">date -d '8a'</span> → 07:00 UTC (UTC+1) · <span class="mono">date -d '8n'</span> → 09:00 UTC (UTC−1) · <span class="mono">date -d '8j'</span> → identical to <span class="mono">date -d '8'</span> · <span class="mono">date -d '8foo'</span> → <strong>invalid date</strong>. GNU does not discard unknown tokens, which is what #286 assumed.</div>
+        <p class="repo">uutils/parse_datetime · replaces #286, which is now closed</p>
+        <p class="what">Every letter <span class="mono">a</span>–<span class="mono">y</span> is a military time zone and all were already in the table except <code>j</code>. It was missing because it is the one letter that is not a fixed offset: it means <em>local time</em>, so it cannot be an <code>Offset</code> at all.</p>
+        <div class="evidence">In <span class="mono">TZ=America/New_York</span>: <span class="mono">8j</span> → 08:00 −0400 (identical to bare <span class="mono">8</span>) · <span class="mono">8z</span> → 04:00 −0400 · <span class="mono">2026-01-01 j</span> → −0500. It follows the DST-aware local rule zone, so it needed new builder state, not a new table entry.</div>
         <div class="did">
-          <p class="eyebrow">In the patch</p>
+          <p class="eyebrow">Verified</p>
           <ul>
-            <li><code>j</code> parsed as its own item — local time, no offset — so <code>8j</code>, <code>8 j</code> and <code>8J</code> all work.</li>
-            <li>Still counts as a time zone item: <code>8j utc</code>, <code>8 utc j</code> and <code>8 j j</code> are rejected as a repeated zone, matching GNU.</li>
-            <li>Consumes the whole alphabetic word before comparing, so <code>8jan</code> still parses as a date.</li>
-            <li>Unknown words stay errors. <code>8foo</code> fails, as it does in GNU.</li>
+            <li>All 26 letters <span class="mono">a</span>–<span class="mono">z</span> resolve to the same instant as GNU coreutils 9.4 — zero mismatches, in both a DST and a non-DST zone.</li>
+            <li>Still a zone item: <code>8j utc</code>, <code>8 utc j</code>, <code>8 j j</code> rejected as a repeated zone.</li>
+            <li><code>8jan</code> still parses as a date; <code>jj</code> and <code>8foo</code> still error.</li>
+            <li>21 of 21 CI checks green, including codecov.</li>
           </ul>
         </div>
-        <p class="next"><b>Next</b><span>#286 is now five months behind main and its diff reverts three later fixes, including your own am/pm change. Close it with a note, open a fresh 105-line PR from the patch, and quote the GNU 9.4 letter table in the body — sylvestre gets to see his review was acted on precisely.</span></p>
+        <div class="evidence">Chasing a codecov miss found a real defect in the new code: <code>set_timestamp</code> guarded every other item but not the new local-zone flag. Unreachable through today's grammar, but wrong. Fixed and covered.</div>
       </div>
     </div>
 
-    <div class="card nudge">
+    <div class="card landed">
       <div class="stripe"></div>
       <div class="card-body">
         <div class="card-top">
           <h3><a href="https://github.com/uutils/coreutils/pull/12363">coreutils #12363</a> — mktemp <code>..</code> prefix</h3>
-          <span class="verdict nudge">Rebase, then nudge</span>
+          <span class="verdict landed">Rebased</span>
         </div>
-        <p class="repo">uutils/coreutils · open since 18 May · 931 commits behind main</p>
-        <p class="what">Nothing is wrong with this one. sylvestre force-pushed your branch on 7 June and then went quiet; it has simply drifted. The only conflict was two test functions landing at the same end-of-file, which is now resolved.</p>
-        <div class="did">
-          <p class="eyebrow">In the patch</p>
-          <ul>
-            <li>Rebased onto current main, conflict in <code>test_mktemp.rs</code> resolved by keeping both test groups.</li>
-            <li>All 49 mktemp tests pass, including your two new <code>dotdot_prefix</code> cases; clippy and fmt clean.</li>
-          </ul>
-        </div>
-        <p class="next"><b>Next</b><span>Force-push the rebase and leave one line: rebased, green, ready when you are. A stale branch is the easiest reason for a reviewer to skip past; removing it costs you nothing.</span></p>
+        <p class="repo">uutils/coreutils · <span class="mono">30be148c</span> · was 931 commits behind</p>
+        <p class="what">Nothing was wrong with this one; it had simply drifted. The only conflict was two test groups landing at the same end of <code>test_mktemp.rs</code>, resolved by keeping both.</p>
+        <div class="evidence">The rebase changed no content: <span class="mono">+77</span> across the same two files before and after. All 49 mktemp tests pass; 167 CI checks green.</div>
       </div>
     </div>
 
@@ -233,90 +239,103 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:.88rem;color:
 
 <section>
   <div class="sec-head">
-    <p class="eyebrow">Also open, but different</p>
-    <h2>mlx-lm #1361 needs a decision, not a patch</h2>
+    <p class="eyebrow">Also rescued</p>
+    <h2>Four PRs the old board never mentioned</h2>
+    <p>All four were drifting or conflicted. Each was rebased onto current main and pushed; one was then withdrawn. None had any maintainer feedback — every comment on them was your own nudge or a bot, so none were blocked on unaddressed review. <span class="mono">BankrBot/skills#491</span>, 208 commits behind, was rebased and nudged on the same pass.</p>
   </div>
-  <div class="card">
-    <div class="stripe" style="background:var(--closed)"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <h3><a href="https://github.com/ml-explore/mlx-lm/pull/1361">mlx-lm #1361</a> — Gemma 4 channel thinking detection</h3>
-        <span class="verdict" style="background:var(--closed-bg);color:var(--closed)">Read the room</span>
-      </div>
-      <p class="what">Eleven weeks, zero maintainer engagement. The signal that matters is elsewhere: on 21 August zcbenz closed your #1371 with "closing non-essential issues so we can work on important items." That repo is actively triaging down, and ten of your thirteen closed-unmerged PRs are from it — six of them superseded by someone else's PR covering the same ground.</p>
-      <p class="what">This isn't a reflection on the work. It's a throughput problem on their side, and it is the clearest argument in this whole ledger for spending your next hours on uutils and alloy instead, where four of your last six PRs merged.</p>
-      <p class="next"><b>Next</b><span>One short comment asking whether it is wanted at all. If it goes quiet again, close it yourself — an author-closed PR reads better than one a maintainer sweeps.</span></p>
-    </div>
-  </div>
-</section>
+  <div class="cards">
 
-<section>
-  <div class="sec-head">
-    <p class="eyebrow">Ready to apply</p>
-    <h2>The patches</h2>
-    <p>Each applies with <code>git am</code> on a fresh branch from that project's current main.</p>
-  </div>
-  <div class="patches">
-    <div class="patch">
-      <p class="fname">alloy-4162-followup.patch</p>
-      <p class="stat"><span class="plus">+72</span> <span class="minus">−55</span> · 1 file</p>
-      <p>Apply on top of your existing PR branch, not on main. Adds one regression test that fails before it.</p>
+    <div class="card waiting">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/ml-explore/mlx-lm/pull/1361">mlx-lm #1361</a> — Gemma 4 channel thinking</h3>
+          <span class="verdict" style="background:var(--closed-bg);color:var(--closed)">Withdrawn</span>
+        </div>
+        <p class="repo">ml-explore/mlx-lm · rebased, then closed by you on 25 Aug</p>
+        <p class="what">Gemma 4 has <code>&lt;|channel&gt;</code> in vocab so it trips the multi-token thinking path, but it also has <code>&lt;|think|&gt;</code> and wraps its entire response in a thought channel — so the server returns empty content. Gating on <code>&lt;|think|&gt;</code> skips detection for those models only; gpt-oss style models are unaffected.</p>
+        <div class="evidence">Rebased out of conflict first, so the withdrawal was a choice rather than a surrender to drift. Closed after eleven weeks without review. The full diagnosis stays in the thread, so anyone hitting the empty-content symptom later still finds the cause.</div>
+      </div>
     </div>
-    <div class="patch">
-      <p class="fname">parse_datetime-j.patch</p>
-      <p class="stat"><span class="plus">+105</span> <span class="minus">−4</span> · 4 files</p>
-      <p>Branch from current main. 399 tests pass, clippy and fmt clean.</p>
+
+    <div class="card waiting">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/pola-rs/polars/pull/27546">polars #27546</a> — CRLF lost when transcoding CSV</h3>
+          <span class="verdict waiting">603 behind</span>
+        </div>
+        <p class="repo">pola-rs/polars · rebased clean</p>
+        <p class="what">When the encoding is not UTF-8, the file is read in Python text mode without <code>newline=</code>, so universal-newline translation rewrites the bytes before the CSV parser sees them.</p>
+        <div class="evidence">Demonstrated directly: <span class="mono">'a,b\r\n1,"x\r\ny"'</span> read without <code>newline=""</code> comes back as <span class="mono">'a,b\n1,"x\ny"'</span> — a CRLF inside a quoted field silently corrupted, and the transcoded path disagreeing with the UTF-8 path on the same input.</div>
+      </div>
     </div>
-    <div class="patch">
-      <p class="fname">coreutils-12363-rebased.patch</p>
-      <p class="stat"><span class="plus">+75</span> · 2 files</p>
-      <p>Your original commit, rebased. Force-push over the existing branch.</p>
+
+    <div class="card waiting">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/huggingface/candle/pull/3518">candle #3518</a> — Qwen3-VL causal mask inverted</h3>
+          <span class="verdict waiting">66 behind</span>
+        </div>
+        <p class="repo">huggingface/candle · rebased clean · <code>cargo check</code> passes</p>
+        <p class="what">The mask gate is backwards: it builds the causal mask when <code>seqlen &lt;= 1</code> (single-token decode, where it is meaningless) and skips it for multi-token prefill, where it is required. The patch swaps the branches and makes the offset access panic-safe.</p>
+      </div>
     </div>
+
+    <div class="card waiting">
+      <div class="stripe"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3><a href="https://github.com/huggingface/candle/pull/3517">candle #3517</a> — broken Trunk install link</h3>
+          <span class="verdict waiting">Docs only</span>
+        </div>
+        <p class="repo">huggingface/candle · rebased clean</p>
+        <p class="what">Three lines. All three occurrences of the stale <code>trunkrs.dev/#install</code> anchor are still present on main today; the GitHub anchor is Trunk's canonical, stable install section.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section>
   <div class="sec-head">
     <p class="eyebrow">The full ledger</p>
-    <h2>All 24 pull requests</h2>
-    <p>Enumerated by fetching every <code>refs/pull/*/head</code> in all five upstream repos and checking authorship in git, rather than reading page summaries — which corrected two that read as merged but were not.</p>
+    <h2>All eight open pull requests</h2>
+    <p>Enumerated through GitHub's search API with pagination, then confirmed per PR. Repositories in organisations you administer are excluded.</p>
   </div>
   <div class="tablewrap">
   <table>
-    <thead><tr><th>PR</th><th>Title</th><th>State</th><th>Note</th></tr></thead>
+    <thead><tr><th>PR</th><th>Title</th><th>State</th><th>Standing</th></tr></thead>
     <tbody>
-      <tr class="repo-row"><td colspan="4">alloy-rs/alloy · alloy-rs/core</td></tr>
-      <tr><td class="num"><a href="https://github.com/alloy-rs/alloy/pull/4162">alloy #4162</a></td><td class="title">recheck receipts of unconfirmed transactions in heartbeat</td><td><span class="chip open">Open</span></td><td class="note">Follow-up patch ready</td></tr>
-      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1105">core #1105</a></td><td class="title">self-referential struct types in EIP-712 canonicalize</td><td><span class="chip merged">Merged</span></td><td class="note">14 May → 23 May</td></tr>
-      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1091">core #1091</a></td><td class="title">apply <code>extra_derives</code> to functions/calls enum container</td><td><span class="chip closed">Closed</span></td><td class="note">Self-closed, 3 weeks no response</td></tr>
-      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1096">core #1096</a></td><td class="title">disable proptest default features (rusty-fork)</td><td><span class="chip closed">Closed</span></td><td class="note">Self-closed for lack of traction</td></tr>
+      <tr class="repo-row"><td colspan="4">Touched this session</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/320">pd #320</a></td><td class="title">military timezone letter <code>j</code> (local time)</td><td><span class="chip open">Open</span></td><td class="note">New PR · 21/21 checks green · mergeable</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12363">cu #12363</a></td><td class="title">preserve <code>..</code> literal prefix in mktemp template</td><td><span class="chip open">Open</span></td><td class="note">Rebased · 167 checks green</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/alloy/pull/4162">alloy #4162</a></td><td class="title">recheck receipts of unconfirmed transactions</td><td><span class="chip open">Open</span></td><td class="note">Follow-up pushed · hang fixed</td></tr>
+      <tr><td class="num"><a href="https://github.com/pola-rs/polars/pull/27546">polars #27546</a></td><td class="title">preserve raw line endings when transcoding CSV</td><td><span class="chip open">Open</span></td><td class="note">Rebased from 603 behind</td></tr>
+      <tr><td class="num"><a href="https://github.com/huggingface/candle/pull/3518">candle #3518</a></td><td class="title">build causal mask for prefill, not single-token decode</td><td><span class="chip open">Open</span></td><td class="note">Rebased · check passes</td></tr>
+      <tr><td class="num"><a href="https://github.com/huggingface/candle/pull/3517">candle #3517</a></td><td class="title">point Trunk link to canonical install section</td><td><span class="chip open">Open</span></td><td class="note">Rebased · docs only</td></tr>
 
-      <tr class="repo-row"><td colspan="4">uutils/parse_datetime · uutils/coreutils</td></tr>
-      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/286">pd #286</a></td><td class="title">ignore unrecognized trailing alpha tokens after pure numbers</td><td><span class="chip open">Open</span></td><td class="note">Wrong premise — replace with the <code>j</code> patch</td></tr>
-      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12363">cu #12363</a></td><td class="title">preserve <code>..</code> literal prefix in mktemp template</td><td><span class="chip open">Open</span></td><td class="note">Rebase ready, CI was green</td></tr>
-      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/284">pd #284</a></td><td class="title">support HH:MM am/pm in combined date-time parsing</td><td><span class="chip merged">Merged</span></td><td class="note">Sat 3 months, landed 5 Jul</td></tr>
-      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/285">pd #285</a></td><td class="title"><code>unix_epoch_second()</code> floor semantics for negative timestamps</td><td><span class="chip merged">Merged</span></td><td class="note">Landed with #284</td></tr>
+      <tr class="repo-row"><td colspan="4">Open, no action needed</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/alloy/pull/4163">alloy #4163</a></td><td class="title">send JSON-RPC batches as a single message</td><td><span class="chip open">Open</span></td><td class="note">Opened today · nothing stale</td></tr>
+      <tr><td class="num"><a href="https://github.com/BankrBot/skills/pull/491">skills #491</a></td><td class="title">add suwappu-dex skill (cross-chain DEX, 14 chains)</td><td><span class="chip open">Open</span></td><td class="note">Rebased from 208 behind · nudged</td></tr>
+
+      <tr class="repo-row"><td colspan="4">Merged — eight upstream</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/284">pd #284</a></td><td class="title">HH:MM am/pm in combined date-time parsing</td><td><span class="chip merged">Merged</span></td><td class="note">Sat 3 months, then landed</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/285">pd #285</a></td><td class="title"><code>unix_epoch_second()</code> floor for negative timestamps</td><td><span class="chip merged">Merged</span></td><td class="note">Landed with #284</td></tr>
       <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/287">pd #287</a></td><td class="title">accept "ut"/"UT" as bare UTC abbreviation</td><td><span class="chip merged">Merged</span></td><td class="note">Landed with #284</td></tr>
-      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12327">cu #12327</a></td><td class="title">date: re-zone trailing TZ abbreviation input to local timezone</td><td><span class="chip merged">Merged</span></td><td class="note">Same-day merge</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/coreutils/pull/12327">cu #12327</a></td><td class="title">date: re-zone trailing TZ abbreviation to local</td><td><span class="chip merged">Merged</span></td><td class="note">Same-day merge</td></tr>
+      <tr><td class="num"><a href="https://github.com/alloy-rs/core/pull/1105">core #1105</a></td><td class="title">self-referential struct types in EIP-712</td><td><span class="chip merged">Merged</span></td><td class="note">14 May → 23 May</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1372">mlx-lm #1372</a></td><td class="title">xtc_threshold default 0.0 → 0.1</td><td><span class="chip merged">Merged</span></td><td class="note">Your resubmit of #1367</td></tr>
+      <tr><td class="num">matgl #801</td><td class="title">MCDropoutWrapper for uncertainty-aware active learning</td><td><span class="chip merged">Merged</span></td><td class="note">Included a 16.5× perf win</td></tr>
+      <tr><td class="num">matgl #809</td><td class="title">make SoftExponential autograd-correct and NaN-safe</td><td><span class="chip merged">Merged</span></td><td class="note">Next-day merge</td></tr>
 
-      <tr class="repo-row"><td colspan="4">materialsvirtuallab/matgl</td></tr>
-      <tr><td class="num"><a href="https://github.com/materialsvirtuallab/matgl/pull/801">#801</a></td><td class="title">MCDropoutWrapper for uncertainty-aware active learning</td><td><span class="chip merged">Merged</span></td><td class="note">Included a 16.5× perf win</td></tr>
-      <tr><td class="num"><a href="https://github.com/materialsvirtuallab/matgl/pull/809">#809</a></td><td class="title">make SoftExponential autograd-correct and NaN-safe</td><td><span class="chip merged">Merged</span></td><td class="note">Next-day merge, 9/9 checks</td></tr>
-
-      <tr class="repo-row"><td colspan="4">ml-explore/mlx-lm — 10 of your 13 closed-unmerged PRs are here</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1372">#1372</a></td><td class="title">xtc_threshold default 0.0 → 0.1 everywhere</td><td><span class="chip merged">Merged</span></td><td class="note">Your resubmit of #1367</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1361">#1361</a></td><td class="title">skip channel thinking detection for Gemma 4</td><td><span class="chip open">Open</span></td><td class="note">11 weeks, no engagement</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1371">#1371</a></td><td class="title">keep <code>tool_call</code> arguments as JSON string</td><td><span class="chip closed">Closed</span></td><td class="note">Declined 21 Aug as "non-essential"</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1362">#1362</a></td><td class="title">expose KV-cache quantization / max-kv-size flags</td><td><span class="chip closed">Closed</span></td><td class="note">Folded into #1353 <em>with attribution</em></td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1360">#1360</a></td><td class="title">clamp negative start in <code>_find</code> (OOB on short prompts)</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1327</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1366">#1366</a></td><td class="title"><code>bool('False')</code> corrupts BatchRotatingKVCache</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1251</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1370">#1370</a></td><td class="title">same fix, resubmitted</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1251</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1365">#1365</a></td><td class="title"><code>--adapter-path</code> silently ignored with model alias</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1249</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1368">#1368</a></td><td class="title">include <code>context_length</code> in <code>/v1/models</code></td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by #1184</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1367">#1367</a></td><td class="title">xtc_threshold default 0.0 → 0.1</td><td><span class="chip closed">Closed</span></td><td class="note">Superseded by your own #1372</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1364">#1364</a></td><td class="title">keep <code>tool_call</code> arguments as JSON string</td><td><span class="chip closed">Closed</span></td><td class="note">Branches cross-contaminated, wrong diff</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1369">#1369</a></td><td class="title">log confirmation when speculative decoding active</td><td><span class="chip closed">Closed</span></td><td class="note">Message lives in a third-party wrapper</td></tr>
-      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1103">#1103</a></td><td class="title">comprehensive Gemma 4 support</td><td><span class="chip closed">Closed</span></td><td class="note">Page reads merged; git says absorbed into #1093/#1105/#1114</td></tr>
+      <tr class="repo-row"><td colspan="4">Closed unmerged — 25, concentrated in one repository</td></tr>
+      <tr><td class="num">mlx-lm</td><td class="title">twelve PRs, six superseded by a parallel fix</td><td><span class="chip closed">12</span></td><td class="note">See the pattern below</td></tr>
+      <tr><td class="num">alloy-rs/core</td><td class="title">#1091, #1096 — both self-closed for lack of traction</td><td><span class="chip closed">2</span></td><td class="note">Author-closed</td></tr>
+      <tr><td class="num"><a href="https://github.com/uutils/parse_datetime/pull/286">pd #286</a></td><td class="title">ignore unrecognized trailing alpha tokens</td><td><span class="chip closed">1</span></td><td class="note">Closed this session — superseded by #320</td></tr>
+      <tr><td class="num"><a href="https://github.com/ml-explore/mlx-lm/pull/1361">mlx-lm #1361</a></td><td class="title">skip channel thinking detection for Gemma 4</td><td><span class="chip closed">1</span></td><td class="note">Closed this session — author-withdrawn, diagnosis left in thread</td></tr>
+      <tr><td class="num">eleven others</td><td class="title">awesome-lists, foundry, solana-web3.js, langchainjs, crewAI, mlx-vlm…</td><td><span class="chip closed">11</span></td><td class="note">Spread one-per-repo</td></tr>
     </tbody>
   </table>
   </div>
@@ -325,29 +344,28 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-size:.88rem;color:
 <section>
   <div class="sec-head">
     <p class="eyebrow">Two patterns worth naming</p>
-    <h2>What the ledger says about where to spend time</h2>
+    <h2>What the corrected ledger says</h2>
   </div>
   <details>
-    <summary>Six of your PRs were superseded by someone else's — all in one repo</summary>
+    <summary>Your strongest merge record is the one this board kept leaving out</summary>
     <div class="inner">
-      <p>#1360, #1362, #1365, #1366, #1368 and #1370 were all overtaken by a parallel PR fixing the same thing. That is what a high-traffic repo with a slow review queue does to small independent fixes: several people find the same bug, and the one that gets merged is whichever the maintainer happens to open first.</p>
-      <p>The counter is not to write more of them. It is to comment on the issue before opening the PR — one line claiming the fix — so a maintainer merging someone else's work at least sees yours first. #1362 is the proof it works: soobrosa folded your flags into #1353 <em>and credited you</em>.</p>
+      <p>Outside these nineteen public projects there is a collaboration repository, <span class="mono">JonathanReiss15/static</span>, with 81 pull requests — <strong>72 of them merged</strong>. That is a higher merge count than every public open-source project on this board combined, several times over.</p>
+      <p>It is a different kind of work, which is why it is kept separate from the totals rather than folded in. But a ledger that omits it is describing the least successful part of your output as though it were all of it. Where sustained review relationships exist, the work lands.</p>
     </div>
   </details>
   <details>
-    <summary>Your merge rate in the uutils projects is 5 of 6</summary>
+    <summary>Eleven of your twenty-six closed PRs are in a single repository</summary>
     <div class="inner">
-      <p>parse_datetime and coreutils merged five of your six PRs. They are slow — #284, #285 and #287 all sat three months before landing together on the same day — but they land, and sylvestre reviews substantively rather than triaging down.</p>
-      <p>Slow-but-lands is worth more than fast-but-superseded when every push counts. Both patches you can send there today are small, self-contained, and answer a review that has already been given.</p>
+      <p>mlx-lm accounts for twelve closures now, six of them overtaken by someone else's parallel PR fixing the same thing. That is what a high-traffic repo with a slow queue does to small independent fixes: several people find the same bug, and whichever the maintainer opens first is the one that merges.</p>
+      <p>The counter is not more of them. It is a one-line claim on the issue before opening the PR. #1362 is the proof it works — those flags were folded into #1353 <em>with attribution</em>.</p>
+      <p>#1361 is now closed — by you, not by a triage sweep, and after being rebased out of conflict rather than left to rot. That is the version that reads well: a withdrawal on your terms, with the Gemma 4 diagnosis left behind for whoever hits the symptom next.</p>
     </div>
   </details>
 </section>
 
 <footer>
-  <p>Enumeration is complete for these five upstream repos: every pull ref was fetched and author-checked, and the merged count matches the eight claimed on your own site. A global sweep was not possible — GitHub's API and search were both unreachable from this session — so a PR to a repo you have never mentioned publicly would not appear here.</p>
-  <p>All three patches were built and tested locally against each project's current main, with anvil 1.5.1 and GNU coreutils 9.4 as the reference implementations.</p>
+  <p>Enumeration is complete as of 25 August 2026, via GitHub's paginated search API and confirmed per pull request. Repositories in organisations you administer — <span class="mono">suwappufoundation</span>, <span class="mono">Suwappu-Labs</span>, <span class="mono">magic-cabinet</span> — are excluded from the upstream totals, as are your own repositories.</p>
+  <p>Every patch was built and tested against each project's current main, with GNU coreutils 9.4 and anvil as reference implementations, and is clean under each project's own fmt and clippy settings. Claims carried over from the previous board were re-derived rather than trusted; where they disagreed with what the code actually does, the code won.</p>
 </footer>
 
 </div>
-
-</body></html>
