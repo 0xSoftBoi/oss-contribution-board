@@ -64,9 +64,10 @@ Never hold two upstream working copies at once.
 ## In flight
 
 - **[cberner/raptorq#228](https://github.com/cberner/raptorq/pull/228)** —
-  builds wheels for Linux aarch64, macOS and Windows in CI. Fixes
-  [#220](https://github.com/cberner/raptorq/issues/220). Verified locally, clone
-  deleted. Awaiting maintainer "Approve and run" for first-time-contributor CI.
+  builds wheels for Linux x86_64/aarch64, macOS and Windows. Fixes
+  [#220](https://github.com/cberner/raptorq/issues/220). **Reworked after
+  maintainer review** into a local zig cross-build with no CI credentials; see
+  the review note below. Verified locally, clone deleted.
 - **[cberner/redb#1408](https://github.com/cberner/redb/pull/1408)** —
   implements `Value`/`Key` for the ten `NonZero` integer types. Fixes
   [#873](https://github.com/cberner/redb/issues/873) for the half not blocked on
@@ -152,6 +153,51 @@ outside tests while the transport is the in-memory phase-1 one. But
 `Shred::from_bytes` is public and documented as taking on-wire bytes, so the
 trap is armed for the first networked caller. Checking reachability before
 writing it up was the difference between a real finding and an overclaim.
+
+### Maintainer review: raptorq#228 — no PyPI key in CI
+
+cberner: *"I'm not excited about adding my PYPI key to the GH runner secrets.
+Is there a way to do this on my local machine with some kind of cross
+compilation setup?"*
+
+Yes, and the reworked PR is better than the original. `py_build_all.sh` builds
+all five targets on one machine with zig as the linker — no docker, no QEMU,
+no CI credentials. Publishing stays local against the existing
+`~/.pypi/raptorq_token`. The `Wheels` workflow now holds no secrets at all and
+runs the same script, so CI exercises the real publish path.
+
+The load-bearing discovery: **zig replaces the manylinux container outright.**
+It selects glibc symbol versions at link time, so Linux wheels come out 2.17
+compatible on any host — `auditwheel` confirms `manylinux_2_17` for both
+x86_64 and aarch64.
+
+Process note worth keeping: my first script built Linux natively when the host
+was Linux. That is wrong, and only measuring caught it — a native build on
+glibc 2.39 fails with `too-recent versioned symbols ... Consider building in a
+manylinux docker container`, the very check the container existed to satisfy.
+The heuristic that sounded obviously right ("build natively when you can") was
+the one defect in the design.
+
+Runtime-tested only what could be: the x86_64 Linux wheel installs clean and
+passes the suite. macOS and Windows wheels are format-verified (Mach-O, PE32+)
+but not executed — stated as such in the PR rather than glossed.
+
+### Maintainer review: raptorq#230 — rejected, wants docs instead
+
+cberner declined the `try_deserialize` fix: *"it gives a false sense of
+security. raptorq is a fountain code which can recover lost packets. It does
+not guarantee error detection. The caller is responsible for ensuring that the
+encoded data is free of corruption when passed to the decode functions. I'm
+happy to merge a PR that documents that."*
+
+Fair, and it re-frames the finding: a length check on the FEC Payload ID looks
+like input validation but only covers one of many malformed inputs, so it
+invites callers to skip the integrity check they actually need. **Open
+follow-up:** repurpose #230 as documentation of the caller's corruption
+responsibility. Our own guard in
+[suwappu-dag#80](https://github.com/Suwappu-Labs/suwappu-dag/pull/80) stands
+regardless — it is defence at the trust boundary, which is exactly where he
+says it belongs.
 
 ### Open question for the owner — license
 
