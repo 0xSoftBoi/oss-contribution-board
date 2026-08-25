@@ -19,7 +19,7 @@ An upstream problem here is our problem, and we have no fallback.
 | `crate-crypto/rust-verkle` (`banderwagon`, `ipa-multipoint`) | suwappu-db state | 24 + 2 | Pinned to a raw git rev `e27b8b4`, never released to crates.io. Powers `production-verkle`. |
 | `cberner/redb` | suwappu-db state + bridge | 72 | Our entire storage substrate. Effectively single-maintainer. |
 | `rustpq/pqcrypto` (`-mldsa`, `-mlkem`, `-traits`) | suwappu-dag consensus signing, lattice `crypto` extra | 6 + 1 | Pre-1.0 (0.1.x) PQ crypto on a consensus path. Lattice pins `<0.5` as a post-KyberSlash baseline. |
-| `aptos-labs/aptos-core` Move VM (5 crates) | suwappu-db `production-move-executor` | 4 + 3 | Pinned to `aptos-node-v1.44.9-hotfix` — a hotfix tag, not a release. |
+| `aptos-labs/aptos-core` Move VM (5 crates) | suwappu-db `production-move-executor` | 4 + 3 | ~~Pinned to `aptos-node-v1.44.9-hotfix`~~ — **resolved**: bumped to v1.48.7-hotfix and repinned by immutable rev in [suwappu-db#9](https://github.com/Suwappu-Labs/suwappu-db/pull/9). |
 | `cberner/raptorq` | suwappu-dag transport (RFC 6330 shred/reconstruct) | 8 | Sole Rust implementation of RFC 6330. No alternative exists. |
 
 ## Tier 2 — largest daily surface, healthier upstreams
@@ -91,6 +91,47 @@ Never hold two upstream working copies at once.
   [#5338](https://github.com/python-telegram-bot/python-telegram-bot/issues/5338).
   Two regression tests, both failing without the fix. Clone deleted.
 
+### On the aptos-core Move VM pin
+
+I twice declined this target as too large for the disk protocol. That was
+wrong, and worth recording as a process failure rather than a technical one:
+`aptos-core` was already in the cargo git cache at 326 MB, and `cargo check`
+with `--features production-move-executor` completed in **8 seconds**. The
+estimate was never measured. Cost of checking: one command.
+
+Findings:
+
+- We were on `aptos-node-v1.44.9-hotfix`; upstream is at `v1.48.7-hotfix`.
+  Four minor versions behind on a **bytecode verifier and interpreter**.
+- No API breakage across those versions — nothing under `vm/` needed changing.
+- The pin used a **git tag**, which is mutable. The lockfile pinned the
+  commit, but `Cargo.toml` following a tag is what decides a re-resolve. Now
+  pinned by rev, tag name kept in a comment. The old tag still resolved to
+  the commit our lock recorded (`77535b56`), so this was hardening, not
+  incident response.
+- `production-move-executor` is opt-in, so this was the cheap window: while
+  nothing depends on the VM's execution semantics it is a dependency change,
+  and once live it is a consensus event.
+
+Limit stated plainly: 161 passing tests show API compatibility and that our
+call sites behave, **not** differential testing of Move execution semantics
+between the two versions. That deserves its own work before the feature is
+switched on.
+
+### Remaining mutable git pins
+
+A sweep of all four repos found three more dependencies pinned by mutable
+tag, all on our *own* repos, so this is a reproducibility question rather
+than an external supply-chain one — a force-pushed tag would silently change
+a build:
+
+- `suwappu-dag` → `suwappudb-bridge`, `suwappudb-state` at tag `v0.6.0`
+- `suwappu-revm` → `suwappu-mldsa-precompile` at tag `v0.3.0`
+
+Seven other git deps across the repos already use `rev`. No Python
+dependency uses a VCS URL; all come from PyPI. Left alone deliberately:
+changing them spans three repos and is a policy call.
+
 ### Internal PRs opened from this work
 
 Not upstream, but they were sitting uncommitted on one disk, which is worse
@@ -101,6 +142,8 @@ than any of the upstream risks tracked above:
   interop proof against PQClean. 697 tests pass.
 - **[Suwappu-Labs/suwappu-db#8](https://github.com/Suwappu-Labs/suwappu-db/pull/8)** —
   the same for anchor credential verification.
+- **[Suwappu-Labs/suwappu-db#9](https://github.com/Suwappu-Labs/suwappu-db/pull/9)** —
+  Move VM bumped v1.44.9 → v1.48.7 and repinned by immutable rev.
 - **[Suwappu-Labs/suwappu-lattice-protocol#65](https://github.com/Suwappu-Labs/suwappu-lattice-protocol/pull/65)** —
   documents and guards the `pqcrypto <0.5` pin against the 1.x backend swap.
 
