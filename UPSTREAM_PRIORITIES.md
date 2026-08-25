@@ -72,12 +72,35 @@ Never hold two upstream working copies at once.
   [#873](https://github.com/cberner/redb/issues/873) for the half not blocked on
   Rust specialization. fmt + clippy clean, no-std builds, 125/125 tests pass.
   Clone deleted.
+- **[cberner/redb#1409](https://github.com/cberner/redb/pull/1409)** — stacked on
+  #1408; niche-encodes `Option<NonZero*>` at 4 bytes instead of 5. Closes the
+  rest of #873. Clone deleted.
+
+### On rust-lang/rust#31844
+
+The maintainer cited [specialization](https://github.com/rust-lang/rust/issues/31844)
+as the blocker for the `Option<NonZero*>` niche. Contributing at that level is not
+a viable path: the tracking issue has been open since February 2016 and still
+carries `I-unsound`, `S-tracking-design-concerns` and `S-tracking-needs-deep-research`,
+and `min_specialization` is perma-unstable and rustc-internal, so a stable-Rust
+library can never use either.
+
+The blocker dissolves instead by moving the varying behaviour onto redb's own
+`Value` trait — a defaulted `niche()` method — so there is only ever one
+`Option<T>` impl and nothing to specialize. That is what #1409 does. Generalizable
+lesson: when an upstream cites a language feature as a blocker, check whether the
+overlap can be pushed into a trait they already control.
 
 ## Queue
 
 Next targets, hardest reliance first. One at a time, per the protocol above.
 
-1. `rustpq/pqcrypto` — 0.1.x PQ crypto on the consensus signing path.
+1. `rustpq/pqcrypto` — **wind-down risk, needs a decision not a patch.** Upstream
+   [#97](https://github.com/rustpq/pqcrypto/issues/97) says PQClean is being
+   archived and the maintainer may retire the `pqcrypto` crates; there is already
+   a RUSTSEC advisory. Our ML-DSA/ML-KEM consensus signing path sits on this.
+   Migration target is RustCrypto's pure-Rust primitives. Raise with the project
+   lead before spending patch effort here.
 2. `crate-crypto/rust-verkle` — unreleased git rev; goal is a crates.io release
    so `production-verkle` can unpin.
 3. `gaiarobotics/aegis` — unowned pin in the request path.
