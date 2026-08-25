@@ -82,6 +82,15 @@ Never hold two upstream working copies at once.
   Bounding the gap makes it linear (0.043s, 450x). Found by measuring, not
   reading. Clone deleted.
 
+- **[python-telegram-bot#5339](https://github.com/python-telegram-bot/python-telegram-bot/pull/5339)** —
+  `AIORateLimiter` promises a `RetryAfter` halts *all* requests, but the shared
+  `_retry_after_event` was `set()` in a `finally` that runs for every request,
+  so any request already in flight when the halt began released it on
+  completion (0.30s into a 2s halt). A shorter backoff also released a longer
+  one. Fixed by counting active backoffs. Closes
+  [#5338](https://github.com/python-telegram-bot/python-telegram-bot/issues/5338).
+  Two regression tests, both failing without the fix. Clone deleted.
+
 ### On rust-lang/rust#31844
 
 The maintainer cited [specialization](https://github.com/rust-lang/rust/issues/31844)
@@ -124,7 +133,15 @@ Next targets, hardest reliance first. One at a time, per the protocol above.
    stale; the risk is bus-factor (4 stars, third-party, in the request path).
    First contribution landed as #22 above. The fork named in suwappubot's
    `requirements.in` comment still does not exist.
-4. `python-telegram-bot` / `SQLAlchemy` — largest surface in suwappubot.
+4. ~~`python-telegram-bot`~~ — first contribution landed as #5339 above. Our pin
+   is 22.8 with the `[rate-limiter]` extra, so the flood-halt bug was on our own
+   send path. Note the existing `test_delay_all_pending_on_retry` looked like it
+   covered this: it starts its second request *after* the halt, so that request
+   blocks harmlessly at the internal `wait()`. The bug only appears for a request
+   already past that wait, which needs the 429 to arrive after some latency —
+   i.e. the test was shaped so the defect could not show up. Worth remembering:
+   an existing test asserting the guarantee is not evidence the guarantee holds.
+5. `SQLAlchemy` — 68 files in suwappubot, not yet surveyed.
 
 ## Note unrelated to upstream
 
