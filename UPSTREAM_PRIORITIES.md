@@ -159,6 +159,28 @@ outside tests while the transport is the in-memory phase-1 one. But
 trap is armed for the first networked caller. Checking reachability before
 writing it up was the difference between a real finding and an overclaim.
 
+### What corrupt raptorq input actually does
+
+Writing the #231 docs, I claimed payload corruption "produces incorrect output
+rather than an error". Automated review challenged it, and measuring against
+master showed the challenge was right — corruption has three outcomes, not one:
+
+| corruption | outcome |
+|---|---|
+| payload altered in place, same length | decodes, returns wrong data, no error |
+| payload truncated below the symbol size | **panics** in `unpack_sub_blocks` |
+| payload extended past the symbol size | excess ignored, decodes correctly |
+| FEC Payload ID altered | panics, indexing the decoder's state |
+
+The truncation panic fires when the symbol is used to reconstruct the block,
+not when the packet is added, so the packet that fails is not the corrupt one.
+Both panics now sit in the `# Panics` sections of `Decoder::decode` and
+`SourceBlockDecoder::decode`.
+
+The lesson repeats one already in this file: the categorical claim that felt
+obviously right was the defect. A docs PR that overstates is worse than no docs
+PR, because it is the thing callers are told to trust.
+
 ### Maintainer review: raptorq#228 — no PyPI key in CI
 
 cberner: *"I'm not excited about adding my PYPI key to the GH runner secrets.
@@ -170,6 +192,13 @@ all five targets on one machine with zig as the linker — no docker, no QEMU,
 no CI credentials. Publishing stays local against the existing
 `~/.pypi/raptorq_token`. The `Wheels` workflow now holds no secrets at all and
 runs the same script, so CI exercises the real publish path.
+
+One gap survived that rework: `just publish_py` never ran `--setup`, so on a
+clean publishing machine it died partway into the first cross-target build with
+a linker error. CI had it right and the local path — the one that actually
+publishes — did not. `build_py_all` now depends on the setup step, and direct
+script use fails a preflight naming what is missing. Both PRs are up to date and
+mergeable; clone deleted, 688M reclaimed.
 
 The load-bearing discovery: **zig replaces the manylinux container outright.**
 It selects glibc symbol versions at link time, so Linux wheels come out 2.17
